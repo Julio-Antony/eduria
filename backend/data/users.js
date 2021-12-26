@@ -1,22 +1,8 @@
 import bcrypt from 'bcryptjs'
+const kelas = { kelas: "X TKJ 1" }
+const kelas2 = { kelas: "XI TKJ 1" }
 
 const users = [
-  {
-    name: 'Admin User',
-    email: 'admin@example.com',
-    password: bcrypt.hashSync('123456', 10),
-    isAdmin: true,
-  },
-  {
-    name: 'John Doe',
-    email: 'john@example.com',
-    password: bcrypt.hashSync('123456', 10),
-  },
-  {
-    name: 'Jane Doe',
-    email: 'jane@example.com',
-    password: bcrypt.hashSync('123456', 10),
-  },
   {
     nama: "Julio Antony",
     email: "julio@eduria.local",
@@ -33,7 +19,7 @@ const users = [
         tahun: "2019"
       },
       jenis_kelamin: "Laki-laki",
-      kelas: "[\"X TKJ 1\",\"XI TKJ 1\"]",
+      kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
       nama_orangtua: {
         alamat: "perum cijingga permai blok z no 69 ",
@@ -78,7 +64,7 @@ const users = [
         tahun: "2019"
       },
       jenis_kelamin: "Perempuan",
-      kelas: "[\"X TKJ 1\",\"XI TKJ 1\"]",
+      kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
       nama_orangtua: {
         alamat: "perum harvest city blok az no 10 ",
@@ -123,7 +109,7 @@ const users = [
         tahun: "2019"
       },
       jenis_kelamin: "Perempuan",
-      kelas: "[\"X TKJ 1\",\"XI TKJ 1\"]",
+      kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
       nama_orangtua: {
         alamat: "perum harvest city blok B no 7 ",
