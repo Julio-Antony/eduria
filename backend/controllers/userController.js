@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
-// import fs from 'fs'
+import fs from 'fs'
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -14,8 +14,7 @@ const authUser = asyncHandler(async (req, res) => {
   if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
-      name: user.name,
-      email: user.email,
+      nama: user.nama,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     })
@@ -69,10 +68,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
   if (user) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
+      data: user
     })
   } else {
     res.status(404)
@@ -152,17 +148,25 @@ const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
 
   if (user) {
-    user.name = req.body.name || user.name
+    user.nama = req.body.nama || user.nama
     user.email = req.body.email || user.email
-    user.isAdmin = req.body.isAdmin
+    user.level = req.body.level || user.level
+    // user.foto = fs.readFileSync(req.body.foto, { encoding: 'base64' }) || user.foto
+    user.identitas.no_induk = req.body.identitas.no_induk || user.identitas.no_induk
+    user.identitas.jenis_kelamin = req.body.identitas.jenis_kelamin || user.identitas.jenis_kelamin
+    user.identitas.agama = req.body.identitas.agama || user.identitas.agama
+    user.identitas.tempat_lahir = req.body.identitas.tempat_lahir || user.identitas.tempat_lahir
+    user.identitas.tanggal_lahir = req.body.identitas.tanggal_lahir || user.identitas.tanggal_lahir
+    user.identitas.no_telepon = req.body.identitas.no_telepon || user.identitas.no_telepon
+    user.identitas.alamat = req.body.identitas.alamat || user.identitas.alamat
 
     const updatedUser = await user.save()
 
     res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
+      data:
+      {
+        updatedUser
+      }
     })
   } else {
     res.status(404)

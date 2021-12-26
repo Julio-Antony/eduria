@@ -40,33 +40,6 @@ const userSchema = mongoose.Schema(
       tanggal_lahir: Date,
       no_telepon: String,
       alamat: String,
-      sekolah_asal: {
-        nama_sekolah: String,
-        alamat: String
-      },
-      diterima_disekolah: {
-        di_kelas: String,
-        pada_tgl: Date
-      },
-      ijazah: {
-        tahun: Number,
-        nomor: Number
-      },
-      nama_orangtua: {
-        ayah: String,
-        ibu: String,
-        pekerjaan_ibu: String,
-        pekerjaan_ayah: String,
-        alamat: String,
-        no_telp: String
-      },
-      wali: {
-        nama_wali: String,
-        pekerjaan_wali: String,
-        alamat: String,
-        no_telp: String
-      },
-      pendidikan_terakhir: String,
       mata_pelajaran_diampu: [mapelSchema]
     }
   },
