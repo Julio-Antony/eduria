@@ -90,7 +90,7 @@ const updatePost = asyncHandler(async (req, res) => {
         post.gambar = gambar
 
         const updatedPost = await post.save()
-        res.json({ message: "Pengumuman berhasi dibuat !", updatedPost })
+        res.json({ message: "Pengumuman berhasi diubah !", updatedPost })
     } else {
         res.status(404)
         throw new Error('Pengumuman tidak ditemukan')
@@ -100,22 +100,22 @@ const updatePost = asyncHandler(async (req, res) => {
 // @desc    Create new comment
 // @route   POST /api/posts/:id/komentar
 // @access  Private
-const createProductReview = asyncHandler(async (req, res) => {
+const createComment = asyncHandler(async (req, res) => {
 
     const post = await Post.findById(req.params.id)
 
     if (post) {
 
         const comment = {
-            nama_user: req.user.nama,
-            komentar: req.body.komentar,
+            nama_user: req.body.nama,
+            statement: req.body.komentar,
             user: req.user._id,
         }
 
         post.komentar.push(comment)
 
         await post.save()
-        res.status(201).json({ message: 'Komentar ditambahkan' })
+        res.status(201).json({ message: 'Komentar ditambahkan', komentar: comment.statement })
     } else {
         res.status(404)
         throw new Error('Pengumuman tidak di temukan')
@@ -128,5 +128,5 @@ export {
     deletePost,
     createPost,
     updatePost,
-    createProductReview,
+    createComment,
 }
