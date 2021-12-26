@@ -1,14 +1,5 @@
 import mongoose from 'mongoose'
 
-const balasan = mongoose.Schema({
-    nama_user: {
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        ref: 'User'
-    },
-    statement: String
-})
-
 const komentar = mongoose.Schema({
     nama_user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,7 +7,6 @@ const komentar = mongoose.Schema({
         ref: 'User'
     },
     statement: String,
-    balasan: [balasan]
 })
 
 const model = mongoose.Schema({

@@ -6,11 +6,12 @@ import {
     deletePost,
     createPost,
     updatePost,
+    createComment
 } from '../controllers/postController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/').get(getPosts).post(protect, admin, createPost)
-// router.route('/:id/reviews').post(protect, createProductReview)
+router.route('/:id/comment').post(protect, createComment)
 router
     .route('/:id')
     .get(getPostById)
