@@ -1,0 +1,37 @@
+[
+    {
+        "display_name": "Dashboard",
+        "route": "/dashboard",
+        "icon": "bx bx-category-alt"
+    },
+    {
+        "display_name": "Pengumuman",
+        "route": "/pengumuman",
+        "icon": "bx bxs-megaphone"
+    },
+    {
+        "display_name": "Kelas",
+        "route": "/kelas",
+        "icon": "bx bx-package"
+    },
+    {
+        "display_name": "Mata Pelajaran",
+        "route": "/mapel",
+        "icon": "bx bx-book-bookmark"
+    },
+    {
+        "display_name": "Log Aktivitas",
+        "route": "/aktivitas",
+        "icon": "bx bx-list-ol"
+    },
+    {
+        "display_name": "User",
+        "route": "/categories",
+        "icon": "bx bx-group"
+    },
+    {
+        "display_name": "settings",
+        "route": "/settings",
+        "icon": "bx bx-cog"
+    }
+]

@@ -1,20 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reportWebVitals from './reportWebVitals'
+
+import { createStore } from 'redux'
+
 import { Provider } from 'react-redux'
-import store from './store'
-import './bootstrap.min.css'
-import './index.css'
-import App from './App'
-import * as serviceWorker from './serviceWorker'
+
+import rootReducer from './redux/reducers'
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import './assets/boxicons-2.0.7/css/boxicons.min.css'
+// import './assets/css/grid.css'
+import './assets/css/theme.css'
+import './assets/css/index.css'
+
+import Layout from './components/layout/Layout'
+
+const store = createStore(
+  rootReducer
+)
+
+document.title = 'Eduria'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <React.StrictMode>
+      <Layout />
+    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
-)
+);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
