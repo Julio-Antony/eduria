@@ -1,11 +1,12 @@
 import mongoose from 'mongoose'
 
 const komentar = mongoose.Schema({
-    nama_user: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         require: true,
         ref: 'User'
     },
+    nama_user:String,
     statement: String,
 })
 
