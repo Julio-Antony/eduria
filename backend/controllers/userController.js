@@ -15,7 +15,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.json({
       _id: user._id,
       nama: user.nama,
-      isAdmin: user.isAdmin,
+      level: user.level,
       token: generateToken(user._id),
     })
   } else {
