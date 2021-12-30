@@ -1,4 +1,6 @@
 import path from 'path'
+import { google } from 'googleapis'
+import fs from 'fs'
 import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
@@ -12,6 +14,44 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import postRoutes from './routes/postRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
+
+const CLIENT_ID = '942004389441-bahc9c6jabpdo2qe4hig8uo6qd5u90uu.apps.googleusercontent.com'
+const CLIENT_SECRET = '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'
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
+const REFRESH_TOKEN = '1//04ohZc1f2AxPDCgYIARAAGAQSNwF-L9Ir02cJBjPHHT54Bm4lW1OMJ6jOjoOhzUhVL1XzwOmH9vcEsAhN4iMqyWsiN9c0Z9uVfr0'
+
+const oauth2Client = new google.auth.OAuth2(
+  CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
+)
+
+oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
+
+const drive = google.drive({
+  version : 'v3',
+  auth : oauth2Client
+})
+
+const filePath = path.join( __dirname, 'controllers/anonim.jpg')
+
+async function uploadFile() {
+  try{
+    const response = await drive.files.create({
+      requestBody: {
+        name:'anonim.jpg',
+        mimeType: 'image/jpg'
+      },
+      media:{
+        mimeType: 'image/jpg',
+        body: fs.createReadStream(filePath)
+      }
+    })
+    console.log(response.data)
+  } catch (error){
+    console.log(error)
+  }
+}
+
+uploadFile()
 
 dotenv.config()
 

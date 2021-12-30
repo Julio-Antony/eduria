@@ -41,8 +41,8 @@ Create a .env file in then root and add the following
 
 ```
 NODE_ENV = development
-PORT = 5000
-MONGO_URI = your mongodb uri
+PORT = 2400
+MONGO_URI = 'mongodb://localhost:27017/eduria'
 JWT_SECRET = 'abc123'
 PAYPAL_CLIENT_ID = your paypal client id
 ```

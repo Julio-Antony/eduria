@@ -115,7 +115,7 @@ const createComment = asyncHandler(async (req, res) => {
         post.komentar.push(comment)
 
         await post.save()
-        res.status(201).json({ message: 'Komentar ditambahkan', komentar: comment.statement })
+        res.status(201).json({ message: 'Komentar ditambahkan', comment })
     } else {
         res.status(404)
         throw new Error('Pengumuman tidak di temukan')
