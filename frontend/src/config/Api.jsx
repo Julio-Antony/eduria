@@ -12,6 +12,10 @@ export const getUsername = () => {
   return localStorage.getItem("user") || null;
 };
 
+export const getLevel = () => {
+  return localStorage.getItem("level") || null;
+};
+
 export const removeUserSession = () => {
   localStorage.removeItem("access_token");
 };

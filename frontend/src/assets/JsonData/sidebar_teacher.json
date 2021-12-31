@@ -1,10 +1,5 @@
 [
     {
-        "display_name": "Dashboard",
-        "route": "/dashboard",
-        "icon": "bx bx-category-alt"
-    },
-    {
         "display_name": "Beranda",
         "route": "/beranda",
         "icon": "bx bx-home"
@@ -25,18 +20,8 @@
         "icon": "bx bx-time-five"
     },
     {
-        "display_name": "Log Aktivitas",
-        "route": "/aktivitas",
-        "icon": "bx bx-list-ol"
-    },
-    {
-        "display_name": "User",
-        "route": "/user",
-        "icon": "bx bx-group"
-    },
-    {
-        "display_name": "settings",
-        "route": "/settings",
-        "icon": "bx bx-cog"
+        "display_name": "Penilaian",
+        "route": "/assessment",
+        "icon": "bx bx-user-check"
     }
 ]

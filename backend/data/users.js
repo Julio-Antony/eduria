@@ -91,7 +91,7 @@ const users = [
       }
     },
     isVerified: true,
-    level: "admin"
+    level: "siswa"
   },
   {
     email: "susimul@eduria.local",
@@ -136,7 +136,7 @@ const users = [
       }
     },
     "isVerified": "true",
-    "level": "admin"
+    "level": "guru"
   }
 ]
 
