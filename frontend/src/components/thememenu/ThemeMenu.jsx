@@ -8,6 +8,12 @@ import ThemeAction from '../../redux/actions/ThemeAction'
 
 const mode_settings = [
     {
+        id: 'normal',
+        name: 'Normal',
+        background: 'orange-color',
+        class: 'theme-mode-normal'
+    },
+    {
         id: 'light',
         name: 'Light',
         background: 'light-background',
@@ -79,9 +85,9 @@ const ThemeMenu = () => {
 
     const closeMenu = () => menu_ref.current.classList.remove('active')
 
-    const [currMode, setcurrMode] = useState('light')
+    const [currMode, setcurrMode] = useState('normal')
 
-    const [currColor, setcurrColor] = useState('blue')
+    const [currColor, setcurrColor] = useState('green')
 
     const dispatch = useDispatch()
 

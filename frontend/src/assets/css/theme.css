@@ -1,3 +1,10 @@
+.theme-mode-normal{
+    --main-bg: var(--main-bg-light);
+    --second-bg: var(--second-bg-normal);
+    --txt-color: var(--txt-color-light);
+    --box-shadow: var(--box-shadow-light);
+}
+
 .theme-mode-light {
     --main-bg: var(--main-bg-light);
     --second-bg: var(--second-bg-light);
