@@ -4,13 +4,13 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { setUserlevel, setUserSession } from "../config/Api";
 import { useForm } from "react-hook-form";
+import { useMemo } from "react";
 
 const Auth = () => {
   const [signIn, toggle] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -23,8 +23,8 @@ const Auth = () => {
   const bodyFormData = {
     email: username,
     password: password,
-  };
-  console.log(bodyFormData);
+  }
+
   const data = useCallback(() => {
     const loginUrl = "/api/users/login";
     const registUrl = "/api/users";
@@ -57,7 +57,7 @@ const Auth = () => {
         }
         setLoading(false);
       });
-  }, []);
+  }, [bodyFormData,history]);
 
   const OnSubmit = () => {
     setError(null);

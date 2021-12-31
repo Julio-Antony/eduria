@@ -31,6 +31,9 @@
   --second-color: #093028;
   --box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
+  --main-bg-normal:#f69110;
+  --second-bg-normal:#fbb034;
+
   --main-bg-light: #ffffff;
   --second-bg-light: #fafafb;
   --txt-color-light: #455560;
@@ -50,8 +53,8 @@
   --main-color-cyan: #10d4d2;
   --second-color-cyan: #2ae9e6;
 
-  --main-color-green: #019707;
-  --second-color-green: #4caf50;
+  --main-color-green: #237a57;
+  --second-color-green: #093028;
 
   --main-color-orange: #d68102;
   --second-color-orange: #fca11a;
@@ -149,6 +152,11 @@ input:focus {
 .card__footer {
   text-align: center;
   text-transform: capitalize;
+}
+
+.normal-background {
+  background-color: var(--main-bg-light);
+  color: #f69110;
 }
 
 .light-background {
