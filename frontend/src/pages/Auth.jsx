@@ -45,9 +45,15 @@ const Auth = () => {
           setUserSession(allData[0].data.token);
           localStorage.setItem("username", allData[0].data.nama);
           setUserlevel(allData[0].data.level);
-          history.push({
-            pathname: "/dashboard",
-          });
+          if (allData[0].data.level === "admin") {
+            history.push({
+              pathname: "/dashboard",
+            });
+          } else {
+            history.push({
+              pathname: "/beranda",
+            });
+          }
         })
       )
       .catch((err) => {
