@@ -23,7 +23,7 @@ const Auth = () => {
   const bodyFormData = {
     email: username,
     password: password,
-  }
+  };
 
   const data = useCallback(() => {
     const loginUrl = "/api/users/login";
@@ -52,12 +52,12 @@ const Auth = () => {
       )
       .catch((err) => {
         console.log(err);
-        if (err.response.status === 401) {
-          setError("Username / Password salah !");
-        }
+        // if (err.response.status === 401) {
+        //   setError("Username / Password salah !");
+        // }
         setLoading(false);
       });
-  }, [bodyFormData,history]);
+  }, [bodyFormData, history]);
 
   const OnSubmit = () => {
     setError(null);
