@@ -20,6 +20,11 @@
         "icon": "bx bx-book-bookmark"
     },
     {
+        "display_name": "Jadwal Pelajaran",
+        "route": "/schedule",
+        "icon": "bx bx-time-five"
+    },
+    {
         "display_name": "Log Aktivitas",
         "route": "/aktivitas",
         "icon": "bx bx-list-ol"
