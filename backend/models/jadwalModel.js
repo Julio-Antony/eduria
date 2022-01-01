@@ -12,7 +12,10 @@ const jadwalSchema = mongoose.Schema({
     },
     hari: String,
     sesi: [jamSchema]
-})
+},
+    {
+        timestamps: true
+    })
 
 const Jadwal = mongoose.model('Jadwal', jadwalSchema)
 
