@@ -1,5 +1,10 @@
 import mongoose from 'mongoose'
 
+const siswaSchema = mongoose.Schema({
+    nama_siswa: String,
+    id: String
+})
+
 const kelasSchema = mongoose.Schema({
     nama_kelas: {
         type: String,
@@ -10,7 +15,8 @@ const kelasSchema = mongoose.Schema({
         required: true
     },
     jurusan: String,
-    jml_siswa: Number
+    jml_siswa: Number,
+    daftar_siswa: [siswaSchema]
 }, {
     timestamps: true,
 })
