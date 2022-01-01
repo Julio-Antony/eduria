@@ -37,7 +37,7 @@ const FormAdd = () => {
   return (
     <div className="card full-height">
       <div className="card__header">
-        <h3>Buat Jadwal</h3>
+        <h3 className="mb-3">Buat Jadwal</h3>
       </div>
       <form>
         <div className="form-group">
