@@ -15,6 +15,16 @@ const diskusiSchema = mongoose.Schema({
     balasan: [balasanSchema]
 })
 
+const materiSchema = mongoose.Schema({
+    attachment: String,
+    attendance: [attendanceSchema],
+    deskripsi: String,
+    diskusi: [diskusiSchema],
+    nama_materi: String,
+    pertemuan_ke: Number,
+    tanggal: String,
+})
+
 const mapel = mongoose.Schema({
     nama_mapel: {
         type: String,
@@ -24,15 +34,10 @@ const mapel = mongoose.Schema({
         type: String,
         required: true
     },
-    materi: {
-        attachment: String,
-        attendance: [attendanceSchema],
-        deskripsi: String,
-        diskusi: [diskusiSchema],
-        nama_materi: String,
-        pertemuan_ke: Number,
-        tanggal: Date,
-    }
+    materi: [materiSchema],
+    penyunting: String
+}, {
+    timestamps: true,
 })
 
 const Mapel = mongoose.model('Mapel', mapel)

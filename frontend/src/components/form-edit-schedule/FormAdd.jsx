@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import axios from "axios";
+import React, { useCallback, useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import { getToken } from "../../config/Api.jsx";
 import "./form.css";
@@ -7,6 +8,7 @@ const FormAdd = () => {
   const [kelas, setKelas] = useState("");
   const [hari, setHari] = useState("");
   const [waktu, setWaktu] = useState("");
+  const [classList, setClassList] = useState([]);
 
   const Placeholder = (props) => {
     return <components.Placeholder {...props} />;
@@ -15,7 +17,31 @@ const FormAdd = () => {
   const token = getToken();
 
   const getData = useCallback(() => {
-    const kelasUrl = "/api/kelas";
+    const kelasUrl = "/api/class";
+
+    const kelas = axios.get(kelasUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    axios
+      .all([kelas])
+      .then(
+        axios.spread((...allData) => {
+          console.log(allData[0].data.kelas);
+          setClassList(allData[0].data.kelas);
+        })
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  let kelasOptions = classList.map(function (kelas) {
+    return { value: kelas.nama_kelas, label: kelas.nama_kelas };
   });
 
   const hariOptions = [
@@ -27,11 +53,11 @@ const FormAdd = () => {
   ];
 
   const waktuOptions = [
-    { value: "07:00", label: "07:00" },
-    { value: "08:20", label: "08:20" },
-    { value: "10:10", label: "10:10" },
-    { value: "11:30", label: "11:30" },
-    { value: "13:10", label: "13:10" },
+    { value: "07:00 - 08:20", label: "07:00 - 08:20" },
+    { value: "08:20 - 10:10", label: "08:20 - 10:10" },
+    { value: "10:10 - 11:30", label: "10:10 - 11:30" },
+    { value: "11:30 - 12:50", label: "11:30 - 12:50" },
+    { value: "13:10 - 14:30", label: "13:10 - 14:30" },
   ];
 
   return (
@@ -49,7 +75,7 @@ const FormAdd = () => {
             placeholder={"Kelas"}
             maxMenuHeight={135}
             isSingle
-            // options={hariOptions}
+            options={kelasOptions}
             onChange={(e) => setKelas(e.value)}
           />
         </div>
