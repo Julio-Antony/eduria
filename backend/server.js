@@ -16,6 +16,7 @@ import postRoutes from './routes/postRoutes.js'
 import dashboardRoutes from './routes/dashboardRoutes.js'
 import scheduleRoutes from './routes/jadwalRoutes.js'
 import classRoutes from './routes/classRoutes.js'
+import mapelRoutes from './routes/mapelRoutes.js'
 
 // const CLIENT_ID = '942004389441-bahc9c6jabpdo2qe4hig8uo6qd5u90uu.apps.googleusercontent.com'
 // const CLIENT_SECRET = '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'
@@ -75,6 +76,7 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/dashboard', dashboardRoutes)
 app.use('/api/schedule', scheduleRoutes)
 app.use('/api/class', classRoutes)
+app.use('/api/subject', mapelRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
