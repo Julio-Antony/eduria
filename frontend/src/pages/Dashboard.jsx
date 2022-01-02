@@ -16,6 +16,7 @@ import statusCards from "../assets/JsonData/status-card-data.json";
 import axios from "axios";
 import { getToken } from "../config/Api";
 import { useState } from "react";
+import TableActivity from "../components/table/TableActivity";
 
 const chartOptions = {
   series: [
@@ -59,28 +60,6 @@ const chartOptions = {
 
 const topCustomers = {
   head: ["Pengguna", "Tanggal"],
-  body: [
-    {
-      username: "john doe",
-      order: "490",
-    },
-    {
-      username: "frank iva",
-      order: "250",
-    },
-    {
-      username: "anthony baker",
-      order: "120",
-    },
-    {
-      username: "frank iva",
-      order: "110",
-    },
-    {
-      username: "anthony baker",
-      order: "80",
-    },
-  ],
 };
 
 const renderCusomerHead = (item, index) => <th key={index}>{item}</th>;
@@ -94,38 +73,6 @@ const renderCusomerBody = (item, index) => (
 
 const latestOrders = {
   header: ["Pengguna", "Aktivitas", "Tanggal", "status"],
-  body: [
-    {
-      user: "john doe",
-      date: "17 Jun 2021",
-      price: "$900",
-      status: "shipping",
-    },
-    {
-      user: "frank iva",
-      date: "1 Jun 2021",
-      price: "$400",
-      status: "paid",
-    },
-    {
-      user: "anthony baker",
-      date: "27 Jun 2021",
-      price: "$200",
-      status: "pending",
-    },
-    {
-      user: "frank iva",
-      date: "1 Jun 2021",
-      price: "$400",
-      status: "paid",
-    },
-    {
-      user: "anthony baker",
-      date: "27 Jun 2021",
-      price: "$200",
-      status: "refund",
-    },
-  ],
 };
 
 const orderStatus = {
@@ -151,6 +98,8 @@ const renderOrderBody = (item, index) => (
 
 const Dashboard = () => {
   const [result, setResult] = useState([]);
+  const [user, setUser] = useState([]);
+  const [activity, setActivity] = useState([]);
   const themeReducer = useSelector((state) => state.ThemeReducer.mode);
 
   const token = getToken();
@@ -161,8 +110,10 @@ const Dashboard = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(Object.values(res.data));
+        console.log(res.data);
         setResult(res.data);
+        setUser(res.data.allUser);
+        setActivity(res.data.allActivity);
       })
       .catch((err) => {
         console.log(err);
@@ -206,7 +157,7 @@ const Dashboard = () => {
               <Table
                 headData={topCustomers.head}
                 renderHead={(item, index) => renderCusomerHead(item, index)}
-                bodyData={topCustomers.body}
+                user={user}
                 renderBody={(item, index) => renderCusomerBody(item, index)}
               />
             </div>
@@ -221,10 +172,10 @@ const Dashboard = () => {
               <h3>Aktivitas Pengguna</h3>
             </div>
             <div className="card__body">
-              <Table
+              <TableActivity
                 headData={latestOrders.header}
                 renderHead={(item, index) => renderOrderHead(item, index)}
-                bodyData={latestOrders.body}
+                activity={activity}
                 renderBody={(item, index) => renderOrderBody(item, index)}
               />
             </div>
