@@ -1,4 +1,5 @@
 import React from "react";
+import "./schedule.css";
 import { getToken } from "../../config/Api";
 import Select, { components } from "react-select";
 import { useState } from "react";
@@ -39,16 +40,23 @@ const Schedules = (props) => {
 
   return (
     <div className="card full-height">
-      <Select
-        closeMenuOnSelect={true}
-        className="mt-1 mb-1"
-        components={{ Placeholder }}
-        placeholder={"Pilih kelas"}
-        maxMenuHeight={135}
-        isSingle
-        options={kelasOptions}
-        onChange={onChangeSchedule}
-      />
+      <div className="row">
+        <div className="col-md-8">
+          <h2 className="page-header">Jadwal Kelas</h2>
+        </div>
+        <div className="col-md-4">
+          <Select
+            closeMenuOnSelect={true}
+            className="mt-1 mb-1"
+            components={{ Placeholder }}
+            placeholder={"Pilih kelas"}
+            maxMenuHeight={135}
+            isSingle
+            options={kelasOptions}
+            onChange={onChangeSchedule}
+          />
+        </div>
+      </div>
       {dataTable.length > 0 ? (
         <table>
           <thead>
@@ -66,22 +74,50 @@ const Schedules = (props) => {
                 {dataTable
                   .filter((data) => data.hari === "senin")
                   .map((item, index) => (
-                    <p key={index}>
-                      {item.waktu}
-                      <br></br>
-                      {item.mapel}
-                    </p>
+                    <div key={index}>
+                      <p className="text-schedule">{item.waktu}</p>
+                      <p>{item.mapel}</p>
+                    </div>
                   ))}
               </td>
               <td>
                 {dataTable
                   .filter((data) => data.hari === "selasa")
                   .map((item, index) => (
-                    <p key={index}>
-                      {item.waktu}
-                      <br></br>
-                      {item.mapel}
-                    </p>
+                    <div key={index}>
+                      <p className="text-schedule">{item.waktu}</p>
+                      <p>{item.mapel}</p>
+                    </div>
+                  ))}
+              </td>
+              <td>
+                {dataTable
+                  .filter((data) => data.hari === "rabu")
+                  .map((item, index) => (
+                    <div key={index}>
+                      <p className="text-schedule">{item.waktu}</p>
+                      <p>{item.mapel}</p>
+                    </div>
+                  ))}
+              </td>
+              <td>
+                {dataTable
+                  .filter((data) => data.hari === "kamis")
+                  .map((item, index) => (
+                    <div key={index}>
+                      <p className="text-schedule">{item.waktu}</p>
+                      <p>{item.mapel}</p>
+                    </div>
+                  ))}
+              </td>
+              <td>
+                {dataTable
+                  .filter((data) => data.hari === "jum'at")
+                  .map((item, index) => (
+                    <div key={index}>
+                      <p className="text-schedule">{item.waktu}</p>
+                      <p>{item.mapel}</p>
+                    </div>
                   ))}
               </td>
             </tr>

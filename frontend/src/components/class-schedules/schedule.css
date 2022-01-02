@@ -1,0 +1,7 @@
+.text-schedule {
+  color: #237a57;
+}
+
+tbody:hover .text-schedule {
+  color: #f69110;
+}
