@@ -2,7 +2,7 @@
 
 > e Learning platform built with the MERN stack & Redux.
 
-![screenshot](https://github.com/Julio-Antony/eduria.git/blob/master/uploads/dashboard.png)
+![screenshot](https://github.com/Julio-Antony/eduria/blob/master/uploads/dashboard.png)
 
 <!-- ## Features
 
@@ -88,14 +88,14 @@ npm run data:destroy
 ```
 Sample User Logins
 
-admin@example.com (Admin)
-123456
+julio@eduria.local (Admin)
+admin123
 
-john@example.com (Customer)
-123456
+susimul@eduria.local (Teacher)
+admin123
 
-jane@example.com (Customer)
-123456
+misyiambar@eduria.local (student)
+admin123
 ```
 
 ## License
