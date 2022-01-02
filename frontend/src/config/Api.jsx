@@ -21,7 +21,11 @@ export const removeUserSession = () => {
 };
 
 export const removeUsername = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("username");
+};
+
+export const removeUserlevel = () => {
+  localStorage.removeItem("level");
 };
 
 export const setUsername = (username) => {

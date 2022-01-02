@@ -2,7 +2,7 @@ import React from "react";
 
 import "./topnav.css";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Dropdown from "../dropdown/Dropdown";
 
@@ -13,6 +13,12 @@ import notifications from "../../assets/JsonData/notification.json";
 import user_image from "../../assets/images/tuat.png";
 
 import user_menu from "../../assets/JsonData/user_menus.json";
+import swal from "sweetalert";
+import {
+  removeUserlevel,
+  removeUsername,
+  removeUserSession,
+} from "../../config/Api";
 
 const nama = localStorage.getItem("username");
 console.log(nama);
@@ -39,12 +45,14 @@ const renderUserToggle = (user) => (
 );
 
 const renderUserMenu = (item, index) => (
-  <Link to="/" key={index}>
-    <div className="notification-item">
-      <i className={item.icon}></i>
-      <span>{item.content}</span>
-    </div>
-  </Link>
+  <>
+    <Link to={item.link ? item.link : "#"} key={index}>
+      <div className="notification-item">
+        <i className="bx bx-log-out-circle bx-rotate-180"></i>
+        <span>{item.content}</span>
+      </div>
+    </Link>
+  </>
 );
 
 const Topnav = () => {
