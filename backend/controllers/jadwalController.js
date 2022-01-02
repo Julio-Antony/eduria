@@ -45,11 +45,24 @@ const getScheduleByClass = asyncHandler(async (req, res) => {
 // @access  Private/Guru
 
 const createSchedule = asyncHandler(async (req, res) => {
+    const { kelas, hari, waktu } = req.body
+
     const jadwal = new Jawdal({
         kelas: req.body.kelas,
         hari: req.body.hari,
+        waktu: req.body.waktu,
+        mapel: req.body.mapel,
         user: req.user._id,
     })
+
+    const classExists = await Jawdal.findOne({ kelas })
+    const hariExists = await Jawdal.findOne({ hari })
+    const waktuExists = await Jawdal.findOne({ waktu })
+
+    if (classExists && hariExists && waktuExists) {
+        res.status(400)
+        throw new Error('Jadwal sudah ada !')
+    }
 
     const createdSchedule = await jadwal.save()
     res.status(201).json({ message: "Jadwal berhasi dibuat !", createdSchedule })
@@ -81,8 +94,8 @@ const updateSchedule = asyncHandler(async (req, res) => {
     }
 })
 
-// @desc    Create new comment
-// @route   POST /api/posts/:id/komentar
+// @desc    Create new session
+// @route   POST /api/posts/:id/session
 // @access  Private
 const createSession = asyncHandler(async (req, res) => {
 

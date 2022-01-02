@@ -53,10 +53,6 @@ const FormAdd = (props) => {
     const data = {
       kelas: kelas,
       hari: hari,
-    };
-
-    const sesi = {
-      kelas: kelas,
       waktu: waktu,
       mapel: mapel,
     };
@@ -69,29 +65,19 @@ const FormAdd = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data.createdSchedule._id);
-        axios
-          .post(`/api/schedule/${res.data.createdSchedule._id}/session`, sesi, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          })
-          .then((res) => {
-            console.log(res);
-            setSubmit(false);
-            swal("Jadwal ditambahkan", {
-              icon: "success",
-            });
-          })
-          .catch((err) => {
-            setSubmit(false);
-            console.log(err);
-          });
+        console.log(res);
+        swal("Jadwal ditambahkan", {
+          icon: "success",
+        });
       })
       .catch((err) => {
         setSubmit(false);
         console.log(err);
+        if (err.response.status === 400) {
+          swal("Jadwal sudah ada !", {
+            icon: "error",
+          });
+        }
       });
   };
 
