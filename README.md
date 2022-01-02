@@ -1,12 +1,10 @@
 # ProShop eCommerce Platform
 
-> eCommerce platform built with the MERN stack & Redux.
+> e Learning platform built with the MERN stack & Redux.
 
-This is the course project for my [MERN eCommerce From Scratch](https://www.udemy.com/course/mern-ecommerce) course
+![screenshot](https://github.com/Julio-Antony/eduria.git/blob/master/uploads/dashboard.png)
 
-![screenshot](https://github.com/bradtraversy/proshop_mern/blob/master/uploads/Screen%20Shot%202020-09-29%20at%205.50.52%20PM.png)
-
-## Features
+<!-- ## Features
 
 - Full featured shopping cart
 - Product reviews and ratings
@@ -23,9 +21,10 @@ This is the course project for my [MERN eCommerce From Scratch](https://www.udem
 - Database seeder (products & users)
 
 ## Note on Issues
+
 Please do not post issues here that are related to your own code when taking the course. Add those in the Udemy Q/A. If you clone THIS repo and there are issues, then you can submit
 
-## Usage
+## Usage -->
 
 ### ES Modules in Node
 
@@ -44,7 +43,6 @@ NODE_ENV = development
 PORT = 2400
 MONGO_URI = 'mongodb://localhost:27017/eduria'
 JWT_SECRET = 'abc123'
-PAYPAL_CLIENT_ID = your paypal client id
 ```
 
 ### Install Dependencies (frontend & backend)
@@ -58,7 +56,7 @@ npm install
 ### Run
 
 ```
-# Run frontend (:3000) & backend (:5000)
+# Run frontend (:3000) & backend (:2400)
 npm run dev
 
 # Run backend only
@@ -99,7 +97,6 @@ john@example.com (Customer)
 jane@example.com (Customer)
 123456
 ```
-
 
 ## License
 
