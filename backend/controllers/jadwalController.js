@@ -45,7 +45,6 @@ const getScheduleByClass = asyncHandler(async (req, res) => {
 // @access  Private/Guru
 
 const createSchedule = asyncHandler(async (req, res) => {
-    const { kelas, hari, waktu } = req.body
 
     const jadwal = new Jawdal({
         kelas: req.body.kelas,
@@ -55,12 +54,14 @@ const createSchedule = asyncHandler(async (req, res) => {
         user: req.user._id,
     })
 
-    const classExists = await Jawdal.findOne({ kelas })
-    const hariExists = await Jawdal.findOne({ hari })
-    const waktuExists = await Jawdal.findOne({ waktu })
+    const jadwalExists = await Jawdal.where('kelas', jadwal.kelas).where('hari', jadwal.hari).where('waktu', jadwal.waktu)
 
-    if (classExists && hariExists && waktuExists) {
-        res.status(400)
+    // const classExists = await Jawdal.findOne({ kelas })
+    // const hariExists = await Jawdal.findOne({ hari })
+    // const waktuExists = await Jawdal.findOne({ waktu })
+
+    if (jadwalExists.length > 0) {
+        res.status(400).json(jadwalExists)
         throw new Error('Jadwal sudah ada !')
     }
 
