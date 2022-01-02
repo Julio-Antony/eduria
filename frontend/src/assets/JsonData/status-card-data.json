@@ -1,22 +1,18 @@
 [
     {
-        "icon": "bx bx-shopping-bag",
-        "count": "1,995",
-        "title": "Total sales"
+        "icon": "bx bxs-graduation",
+        "title": "Siswa"
     },
     {
-        "icon": "bx bx-cart",
-        "count": "2,001",
-        "title": "Daily visits"
+        "icon": "bx bxs-chalkboard",
+        "title": "Guru"
     },
     {
-        "icon": "bx bx-dollar-circle",
-        "count": "$2,632",
-        "title": "Total income"
+        "icon": "bx bxs-face",
+        "title": "Admin"
     },
     {
-        "icon": "bx bx-receipt",
-        "count": "1,711",
-        "title": "Total orders"
+        "icon": "bx bxs-school",
+        "title": "Kelas"
     }
 ]

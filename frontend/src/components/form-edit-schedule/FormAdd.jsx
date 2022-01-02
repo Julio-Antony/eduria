@@ -1,19 +1,16 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Select, { components } from "react-select";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import { getToken } from "../../config/Api.jsx";
 import "./form.css";
 
-const FormAdd = () => {
+const FormAdd = (props) => {
   const [kelas, setKelas] = useState("");
   const [hari, setHari] = useState("");
   const [waktu, setWaktu] = useState("");
   const [mapel, setMapel] = useState("");
-  const [id, setId] = useState("");
-  const [classList, setClassList] = useState([]);
-  const [subjectList, setSubjectList] = useState([]);
   const [submit, setSubmit] = useState(false);
   const {
     register,
@@ -27,41 +24,11 @@ const FormAdd = () => {
 
   const token = getToken();
 
-  const getData = useCallback(() => {
-    const kelasUrl = "/api/class";
-    const subjectUrl = "/api/subject";
-
-    const kelas = axios.get(kelasUrl, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const subject = axios.get(subjectUrl, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    axios
-      .all([kelas, subject])
-      .then(
-        axios.spread((...allData) => {
-          console.log(allData[1].data.subject);
-          setClassList(allData[0].data.kelas);
-          setSubjectList(allData[1].data.subject);
-        })
-      )
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [token]);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-  let kelasOptions = classList.map(function (kelas) {
+  let kelasOptions = props.class.map(function (kelas) {
     return { value: kelas.nama_kelas, label: kelas.nama_kelas };
   });
 
-  let subjectOptions = subjectList.map(function (subject) {
+  let subjectOptions = props.subject.map(function (subject) {
     return { value: subject.nama_mapel, label: subject.nama_mapel };
   });
 
