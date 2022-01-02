@@ -1,4 +1,4 @@
-# ProShop eCommerce Platform
+# Eduria - E-learning Platform
 
 > e Learning platform built with the MERN stack & Redux.
 
