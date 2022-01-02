@@ -1,16 +1,22 @@
 import React, { useCallback, useState } from "react";
 import * as Components from "../components/auth/LoginComponent";
+import bcrypt from "bcryptjs";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { setUserlevel, setUserSession } from "../config/Api";
 import { useForm } from "react-hook-form";
 import { useMemo } from "react";
+import swal from "sweetalert";
 
 const Auth = () => {
   const [signIn, toggle] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [registName, setRegistName] = useState("");
+  const [registEmail, setRegistEmail] = useState("");
+  const [registPassword, setRegistPassword] = useState("");
   const [error, setError] = useState(null);
+  const [error1, setError1] = useState(null);
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -25,16 +31,19 @@ const Auth = () => {
     password: password,
   };
 
+  const registData = {
+    nama: registName,
+    email: registEmail,
+    password: bcrypt.hashSync(registPassword, 10),
+    level: "siswa",
+  };
+
   const data = useCallback(() => {
     const loginUrl = "/api/users/login";
-    const registUrl = "/api/users";
 
     const login = axios.post(loginUrl, bodyFormData, {
       headers: { "Content-Type": "application/json" },
     });
-    // const regist = axios.post(registUrl, {
-    //   headers: { "Content-Type": "application/json" },
-    // });
 
     axios
       .all([login])
@@ -58,9 +67,9 @@ const Auth = () => {
       )
       .catch((err) => {
         console.log(err);
-        // if (err.response.status === 401) {
-        //   setError("Username / Password salah !");
-        // }
+        if (err.response.status === 401) {
+          setError("Username / Password salah !");
+        }
         setLoading(false);
       });
   }, [bodyFormData, history]);
@@ -71,16 +80,85 @@ const Auth = () => {
     data();
   };
 
+  const OnRegist = () => {
+    setError(null);
+    setLoading(true);
+    axios
+      .post("/api/users", registData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        console.log(res);
+        history.push({ pathname: "/" });
+        swal("Berhasil membuat akun, silahkan login", {
+          icon: "success",
+        });
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 400) {
+          setError1("User sudah dipakai");
+        }
+        setLoading(false);
+      });
+  };
+
   return (
     <div>
       <div className="col-md-8 offset-3">
         <Components.Container>
           <Components.SignUpContainer signingIn={signIn}>
-            <Components.Form>
-              <Components.Input type="text" placeholder="Name" />
-              <Components.Input type="email" placeholder="Email" />
-              <Components.Input type="password" placeholder="Password" />
-              <Components.Button>Daftar</Components.Button>
+            <Components.Form onSubmit={handleSubmit(OnRegist)}>
+              {error1 && <p className="error text-danger">{error1}</p>}
+              <Components.Input
+                type="text"
+                id="registUsername"
+                name="registUsername"
+                aria-invalid={errors.name ? "true" : "false"}
+                {...register("registUsername")}
+                placeholder="Username"
+                onChange={(e) => setRegistName(e.target.value)}
+                required
+              />
+              {errors.registUsername && (
+                <p className="error text-danger">
+                  {errors.registUsername.message}
+                </p>
+              )}
+              <Components.Input
+                type="email"
+                id="registEmail"
+                name="registEmail"
+                aria-invalid={errors.name ? "true" : "false"}
+                {...register("registEmail")}
+                placeholder="Email"
+                onChange={(e) => setRegistEmail(e.target.value)}
+                required
+              />
+              {errors.registEmail && (
+                <p className="error text-danger">
+                  {errors.registEmail.message}
+                </p>
+              )}
+              <Components.Input
+                type="password"
+                id="registPassword"
+                name="registPassword"
+                aria-invalid={errors.name ? "true" : "false"}
+                {...register("registPassword")}
+                placeholder="Password"
+                onChange={(e) => setRegistPassword(e.target.value)}
+                required
+              />
+              {errors.registPassword && (
+                <p className="error text-danger">
+                  {errors.registPassword.message}
+                </p>
+              )}
+              <Components.Button type="submit" disabled={loading}>
+                Daftar
+              </Components.Button>
             </Components.Form>
           </Components.SignUpContainer>
           <Components.SignInContainer signingIn={signIn}>
@@ -112,7 +190,7 @@ const Auth = () => {
               {errors.password && (
                 <p className="error text-danger">{errors.password.message}</p>
               )}
-              <Components.Anchor href="#">lupa password?</Components.Anchor>
+              {/* <Components.Anchor href="#">lupa password?</Components.Anchor> */}
               <Components.Button type="submit" disabled={loading}>
                 {loading ? "Loading..." : "Masuk"}
               </Components.Button>

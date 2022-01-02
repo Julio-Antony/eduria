@@ -2,7 +2,7 @@ import React from "react";
 
 import "./topnav.css";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Dropdown from "../dropdown/Dropdown";
 
@@ -13,12 +13,6 @@ import notifications from "../../assets/JsonData/notification.json";
 import user_image from "../../assets/images/tuat.png";
 
 import user_menu from "../../assets/JsonData/user_menus.json";
-import swal from "sweetalert";
-import {
-  removeUserlevel,
-  removeUsername,
-  removeUserSession,
-} from "../../config/Api";
 
 const nama = localStorage.getItem("username");
 console.log(nama);
@@ -59,7 +53,7 @@ const Topnav = () => {
   return (
     <div className="topnav">
       <div className="topnav__search">
-        <input type="text" placeholder="Search here..." />
+        <input type="text" placeholder="Cari disini..." />
         <i className="bx bx-search"></i>
       </div>
       <div className="topnav__right">
@@ -72,13 +66,13 @@ const Topnav = () => {
           />
         </div>
         <div className="topnav__right-item">
-          <Dropdown
+          {/* <Dropdown
             icon="bx bx-bell"
             badge="12"
             contentData={notifications}
             renderItems={(item, index) => renderNotificationItem(item, index)}
             renderFooter={() => <Link to="/">Selengkapnya</Link>}
-          />
+          /> */}
           {/* dropdown here */}
         </div>
         <div className="topnav__right-item">
