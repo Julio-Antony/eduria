@@ -1,15 +1,13 @@
 [
     {
         "icon": "bx bx-user",
-        "content": "Profile"
-    },
-    {
-        "icon": "bx bx-wallet-alt",
-        "content": "My Wallet"
+        "content": "Profil Saya",
+        "link":"/profile"
     },
     {
         "icon": "bx bx-cog",
-        "content": "Settings"
+        "content": "Pengaturan",
+        "link":"/config"
     },
     {
         "icon": "bx bx-log-out-circle bx-rotate-180",
