@@ -62,17 +62,11 @@ const Schedules = (props) => {
           </thead>
           <tbody>
             <tr>
-              {dataTable.map((data, i) => (
-                <td key={i}>
-                  {data.sesi.map((sesi, index) => (
-                    <small className="d-flex mb-2" key={index}>
-                      {sesi.mapel}
-                      <br></br>
-                      {sesi.waktu}
-                    </small>
-                  ))}
-                </td>
-              ))}
+              <td>asd</td>
+              <td>asd</td>
+              <td>asd</td>
+              <td>asd</td>
+              <td>asw</td>
             </tr>
             <tr>
               {dataTable.map((data, i) => (
@@ -86,6 +80,9 @@ const Schedules = (props) => {
                   ))}
                 </td>
               ))}
+            </tr>
+            <tr>
+              <td>{dataTable.find()}</td>
             </tr>
           </tbody>
         </table>

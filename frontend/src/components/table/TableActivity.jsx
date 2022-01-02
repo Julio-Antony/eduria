@@ -1,10 +1,15 @@
 import moment from "moment-timezone";
 import React, { useState } from "react";
+import Badge from "../badge/Badge";
 
 import "./table.css";
 
-const Table = (props) => {
-  const user = props.user || [];
+const activityStatus = {
+  Gagal: "danger",
+  Berhasil: "success",
+};
+
+const TableActivity = (props) => {
   const activity = props.activity || [];
 
   const initDataShow =
@@ -48,15 +53,27 @@ const Table = (props) => {
               </tr>
             </thead>
           ) : null}
-          {user ? (
+          {activity ? (
             <tbody>
-              {user.map((item, index) => (
+              {activity.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.nama}</td>
+                  <td>{item.nama_pengguna}</td>
+                  <td>{item.nama_aktivitas}</td>
                   <td>
                     {moment(item.createdAt.substring(0, 16))
                       .tz("Asia/Jakarta")
                       .format("YYYY-MM-DD HH:mm")}
+                  </td>
+                  <td>
+                    <span
+                      class={
+                        item.status == "Gagal"
+                          ? "badge badge-danger"
+                          : "badge badge-success"
+                      }
+                    >
+                      {item.status}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -83,4 +100,4 @@ const Table = (props) => {
   );
 };
 
-export default Table;
+export default TableActivity;

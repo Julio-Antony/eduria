@@ -10,40 +10,14 @@ const users = [
     identitas: {
       agama: "islam",
       alamat: "Cikarang",
-      diterima_disekolah: {
-        di_kelas: "X",
-        pada_tanggal: "2020-07-20T03:40:18.199Z"
-      },
-      ijazah: {
-        nomor: "M-SMK/06-3/0000001",
-        tahun: "2019"
-      },
       jenis_kelamin: "Laki-laki",
       kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
-      nama_orangtua: {
-        alamat: "perum cijingga permai blok z no 69 ",
-        ayah: "damai",
-        ibu: "misyi",
-        no_telpon: "08968913345",
-        pekerjaan_ayah: "guru",
-        pekerjaan_ibu: "bidan"
-      },
       nisn: "null",
       no_telepon: "81381953798",
       nomor_induk: "311810397",
-      sekolah_asal: {
-        alamat: "jl.jatimulya raya No.185",
-        nama_sekolah: "SMP NEGERI 4 TAMBUN SELATAN"
-      },
       tanggal_lahir: "1997-07-21T02:39:19.199Z",
       tempat_lahir: "tangerang",
-      wali: {
-        alamat: "Kp Cijingga Desa serang",
-        nama_wali: "susi",
-        no_telpon: "082323657890",
-        pekerjaan_wali: "dosen"
-      }
     },
     isVerified: true,
     level: "admin"
@@ -55,40 +29,14 @@ const users = [
     identitas: {
       agama: "islam",
       alamat: "Cibarusah",
-      diterima_disekolah: {
-        di_kelas: "X",
-        pada_tanggal: "2020-07-20T03:40:18.199Z"
-      },
-      ijazah: {
-        nomor: "M-SMK/06-3/0000002",
-        tahun: "2019"
-      },
       jenis_kelamin: "Perempuan",
       kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
-      nama_orangtua: {
-        alamat: "perum harvest city blok az no 10 ",
-        ayah: "dica",
-        ibu: "maesyarah",
-        no_telpon: "08968913678",
-        pekerjaan_ayah: "karyawan",
-        pekerjaan_ibu: "perawat"
-      },
       nisn: "null",
       no_telepon: "082323657890",
       nomor_induk: "311810398",
-      sekolah_asal: {
-        alamat: "jl.tuanku imam bonjol",
-        nama_sekolah: "SMP NEGERI 1 TAMBUN SELATAN"
-      },
       tanggal_lahir: "1997-01-20T02:39:19.199Z",
       tempat_lahir: "tangerang",
-      wali: {
-        alamat: "Kp Cijingga Desa serang",
-        nama_wali: "refo",
-        no_telpon: "082323657899",
-        pekerjaan_wali: "guru"
-      }
     },
     isVerified: true,
     level: "siswa"
@@ -100,44 +48,399 @@ const users = [
     identitas: {
       agama: "islam",
       alamat: "pondok ungu",
-      diterima_disekolah: {
-        di_kelas: "X",
-        pada_tanggal: "2020-07-20T03:40:18.199Z"
-      },
-      ijazah: {
-        nomor: "M-SMK/06-3/0000003",
-        tahun: "2019"
-      },
       jenis_kelamin: "Perempuan",
       kelas: [kelas, kelas2],
       kelas_sekarang: "XII TKJ 1",
-      nama_orangtua: {
-        alamat: "perum harvest city blok B no 7 ",
-        ayah: "budi",
-        ibu: "nina",
-        no_telpon: "08968913345",
-        pekerjaan_ayah: "karyawan",
-        pekerjaan_ibu: "perawat"
-      },
       nisn: "null",
       no_telepon: "082323657123",
       nomor_induk: "311810340",
-      sekolah_asal: {
-        alamat: "jl.tuanku imam bonjol",
-        nama_sekolah: "SMP NEGERI 1 TAMBUN SELATAN"
-      },
       tanggal_lahir: "1998-01-22T02:39:19.199Z",
       tempat_lahir: "bekasi",
-      wali: {
-        alamat: "Kp Cijingga Desa serang",
-        nama_wali: "zahra",
-        no_telpon: "082323123899",
-        pekerjaan_wali: "guru"
-      }
     },
     "isVerified": "true",
     "level": "guru"
-  }
+  },
+  {
+    email: "Abdulfatah@eduria.local",
+    nama: "Abdul Fatah",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "cikarang",
+      jenis_kelamin: "Laki-Laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "08978085151",
+      nomor_induk: "311710789",
+      tanggal_lahir: "2007-02-22T02:39:19.199Z",
+      tempat_lahir: "bekasi",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "dicayudis@eduria.local",
+    nama: "Dica Yudistira",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "Tegal Gede",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085812657123",
+      nomor_induk: "311812340",
+      tanggal_lahir: "1998-03-30T02:39:19.199Z",
+      tempat_lahir: "Madiun",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "tinuy@eduria.local",
+    nama: "Tina Okta Riyanti",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "cibitung",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085812657567",
+      nomor_induk: "311812567",
+      tanggal_lahir: "2000-02-25T02:39:19.199Z",
+      tempat_lahir: "Banjaratma",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "rifqom@eduria.local",
+    nama: "Rifqi Iqrom",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Nasrani",
+      alamat: "Jakarta",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087812657567",
+      nomor_induk: "311810721",
+      tanggal_lahir: "2000-07-28T02:39:19.199Z",
+      tempat_lahir: "Kuningan",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "lelianjelim@eduria.local",
+    nama: "Leli Anjeli",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "Bekasi",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085678956173",
+      nomor_induk: "311810432",
+      tanggal_lahir: "1998-01-08T02:39:19.199Z",
+      tempat_lahir: "Wonogiri",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "paulosergio@eduria.local",
+    nama: "Paulo Sergio",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Katolik",
+      alamat: "Bekasi",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085789657567",
+      nomor_induk: "311810500",
+      tanggal_lahir: "1987-08-08T02:39:19.199Z",
+      tempat_lahir: "Wamena",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "jajangnurjaman@eduria.local",
+    nama: "Jajang Nurjaman",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "Bekasi",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087812657780",
+      nomor_induk: "311810601",
+      tanggal_lahir: "1997-07-25T02:39:19.199Z",
+      tempat_lahir: "Majalengka",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "rockypituray@eduria.local",
+    nama: "Rocky Pituray",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "kristen",
+      alamat: "Bekasi",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087812235667",
+      nomor_induk: "311810510",
+      tanggal_lahir: "1987-09-01T02:39:19.199Z",
+      tempat_lahir: "Nduga",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "dedikrusnandar@eduria.local",
+    nama: "Dedi Krusnandar",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "Bandung",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089912657564",
+      nomor_induk: "311810933",
+      tanggal_lahir: "1981-01-10T02:39:19.199Z",
+      tempat_lahir: "Subang",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+  {
+    email: "gianzola@eduria.local",
+    nama: "Gian Zola",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "islam",
+      alamat: "Bandung",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087834327567",
+      nomor_induk: "311810888",
+      tanggal_lahir: "1998-05-15T02:39:19.199Z",
+      tempat_lahir: "Pangandaran",
+    },
+    isVerified: true,
+    level: "siswa"
+  },
+
+  {
+    email: "soraaoi@eduria.local",
+    nama: "Sora Aoi",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Atheis",
+      alamat: "Jakarta",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089912657907",
+      nomor_induk: "411510771",
+      tanggal_lahir: "1991-08-10T02:39:19.199Z",
+      tempat_lahir: "Kobe",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "mariaozawa@eduria.local",
+    nama: "Maria Ozawa",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Atheis",
+      alamat: "Jakarta",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089967887907",
+      nomor_induk: "411510888",
+      tanggal_lahir: "1994-05-11T02:39:19.199Z",
+      tempat_lahir: "Tokyo",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "kakeklegend@eduria.local",
+    nama: "Sugiono",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Atheis",
+      alamat: "Jakarta",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087756717907",
+      nomor_induk: "411510880",
+      tanggal_lahir: "1961-09-20T02:39:19.199Z",
+      tempat_lahir: "Fukushima",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "mariatakagi@eduria.local",
+    nama: "Maria takagi",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Atheis",
+      alamat: "Jakarta",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087812658881",
+      nomor_induk: "411510996",
+      tanggal_lahir: "1998-07-28T02:39:19.199Z",
+      tempat_lahir: "Tokyo",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "suprapto@eduria.local",
+    nama: "Suprapto",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Islam",
+      alamat: "Bogor",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089711657907",
+      nomor_induk: "411510111",
+      tanggal_lahir: "1965-01-11T02:39:19.199Z",
+      tempat_lahir: "Ponorogo",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "aiuehara@eduria.local",
+    nama: "Ai Uehara",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Atheis",
+      alamat: "Bogor",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089911122907",
+      nomor_induk: "411510115",
+      tanggal_lahir: "1999-09-17T02:39:19.199Z",
+      tempat_lahir: "Hiroshima",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "agunglatif@eduria.local",
+    nama: "Agung Latif",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Islam",
+      alamat: "Bekasi",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085611657887",
+      nomor_induk: "411510435",
+      tanggal_lahir: "1975-11-27T02:39:19.199Z",
+      tempat_lahir: "Tasikmalaya",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "budisudarsono@eduria.local",
+    nama: "Budi Sudarsono",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Islam",
+      alamat: "Bandung",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "087712658899",
+      nomor_induk: "411510119",
+      tanggal_lahir: "1976-02-12T02:39:19.199Z",
+      tempat_lahir: "Blitar",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "agunglaksono@eduria.local",
+    nama: "Agung Laksono",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Islam",
+      alamat: "Bekasi",
+      jenis_kelamin: "Laki-laki",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "085677657921",
+      nomor_induk: "411510775",
+      tanggal_lahir: "1991-11-21T02:39:19.199Z",
+      tempat_lahir: "Bogor",
+    },
+    isVerified: true,
+    level: "guru"
+  },
+  {
+    email: "angelia@eduria.local",
+    nama: "Angelia",
+    password: bcrypt.hashSync('admin123', 10),
+    identitas: {
+      agama: "Islam",
+      alamat: "Cirebon",
+      jenis_kelamin: "Perempuan",
+      kelas: [kelas],
+      kelas_sekarang: "XII TKJ 1",
+      nisn: "null",
+      no_telepon: "089967129907",
+      nomor_induk: "411510990",
+      tanggal_lahir: "1990-02-15T02:39:19.199Z",
+      tempat_lahir: "Brebes",
+    },
+    isVerified: true,
+    level: "guru"
+  },
 ]
 
 export default users
