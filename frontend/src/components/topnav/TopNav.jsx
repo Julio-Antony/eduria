@@ -69,7 +69,7 @@ const Topnav = () => {
             badge="12"
             contentData={notifications}
             renderItems={(item, index) => renderNotificationItem(item, index)}
-            renderFooter={() => <Link to="/">View All</Link>}
+            renderFooter={() => <Link to="/">Selengkapnya</Link>}
           />
           {/* dropdown here */}
         </div>
