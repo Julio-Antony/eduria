@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import Schedules from "../components/class-schedules/Schedules.jsx";
 import FormAdd from "../components/form-edit-schedule/FormAdd.jsx";
+import TableSchedule from "../components/table/TableSchedule.jsx";
 import { getToken } from "../config/Api";
 
 const Schedule = () => {
@@ -14,7 +15,7 @@ const Schedule = () => {
   const getData = useCallback(() => {
     const kelasUrl = "/api/class";
     const subjectUrl = "/api/subject";
-    const scheduleUrl = "/api/schedule";
+    const scheduleUrl = "/api/schedule?pageNumber=2";
 
     const kelas = axios.get(kelasUrl, {
       headers: { Authorization: `Bearer ${token}` },
@@ -32,7 +33,7 @@ const Schedule = () => {
       .all([kelas, subject, schedule])
       .then(
         axios.spread((...allData) => {
-          console.log(allData[2].data.jadwal);
+          console.log(allData[2].data);
           setClassList(allData[0].data.kelas);
           setSubjectList(allData[1].data.subject);
           setScheduleList(allData[2].data.jadwal);
@@ -58,23 +59,7 @@ const Schedule = () => {
           <Schedules class={classList} />
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card full-height">
-            <div className="card__header">
-              <h3>Daftar Jadwal</h3>
-            </div>
-            <div className="card__body">
-              {/* <Table
-                                headData={topCustomers.head}
-                                renderHead={(item, index) => renderCusomerHead(item, index)}
-                                bodyData={topCustomers.body}
-                                renderBody={(item, index) => renderCusomerBody(item, index)}
-                            /> */}
-            </div>
-          </div>
-        </div>
-      </div>
+      <TableSchedule schedule={scheduleList} />
     </div>
   );
 };

@@ -23,7 +23,7 @@ const getAllSchedule = asyncHandler(async (req, res) => {
         .limit(pageSize)
         .skip(pageSize * (page - 1))
 
-    res.json({ jadwal, page, pages: Math.ceil(count / pageSize) })
+    res.json({ jadwal, page, count, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Fetch schedule
