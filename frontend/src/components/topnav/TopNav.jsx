@@ -12,8 +12,6 @@ import notifications from "../../assets/JsonData/notification.json";
 
 import user_image from "../../assets/images/tuat.png";
 
-import user_menu from "../../assets/JsonData/user_menus.json";
-
 const nama = localStorage.getItem("username");
 
 const curr_user = {
@@ -37,17 +35,6 @@ const renderUserToggle = (user) => (
   </div>
 );
 
-const renderUserMenu = (item, index) => (
-  <>
-    <Link to={item.link ? item.link : "#"} key={index}>
-      <div className="notification-item">
-        <i className="bx bx-log-out-circle bx-rotate-180"></i>
-        <span>{item.content}</span>
-      </div>
-    </Link>
-  </>
-);
-
 const Topnav = () => {
   return (
     <div className="topnav">
@@ -60,18 +47,18 @@ const Topnav = () => {
           {/* dropdown here */}
           <Dropdown
             customToggle={() => renderUserToggle(curr_user)}
-            contentData={user_menu}
-            renderItems={(item, index) => renderUserMenu(item, index)}
+            // contentData={user_menu}
+            // renderItems={(item, index) => renderUserMenu(item, index)}
           />
         </div>
         <div className="topnav__right-item">
-          {/* <Dropdown
+          <Dropdown
             icon="bx bx-bell"
             badge="12"
             contentData={notifications}
             renderItems={(item, index) => renderNotificationItem(item, index)}
             renderFooter={() => <Link to="/">Selengkapnya</Link>}
-          /> */}
+          />
           {/* dropdown here */}
         </div>
         <div className="topnav__right-item">

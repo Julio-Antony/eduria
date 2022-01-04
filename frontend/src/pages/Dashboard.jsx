@@ -12,7 +12,6 @@ import Table from "../components/table/Table";
 
 import Badge from "../components/badge/Badge";
 
-import statusCards from "../assets/JsonData/status-card-data.json";
 import axios from "axios";
 import { getToken } from "../config/Api";
 import { useState } from "react";
@@ -118,7 +117,7 @@ const Dashboard = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [token]);
 
   return (
     <div>

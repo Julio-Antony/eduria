@@ -78,3 +78,16 @@ input[type="file"] {
 .img-container:hover .middle {
   opacity: 1;
 }
+
+.card-menu{
+  position: absolute;
+  display: flex-end;
+  margin-left: 15px;
+  margin-top: 0px;
+}
+
+.card-menu:hover{
+  cursor: pointer;
+}
+
+
