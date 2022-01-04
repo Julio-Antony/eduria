@@ -40,7 +40,7 @@ const Subject = () => {
 
   useEffect(() => {
     data();
-  }, []);
+  }, [data]);
 
   const perPage = 10;
   const displayMapel = mapel.map((item, index) => {

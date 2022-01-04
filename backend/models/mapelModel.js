@@ -34,7 +34,7 @@ const mapel = mongoose.Schema({
         type: String,
         required: true
     },
-    cover: Buffer,
+    cover: String,
     materi: [materiSchema],
     penyunting: String
 }, {
