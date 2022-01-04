@@ -1,13 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import Modal from "react-modal/lib/components/Modal";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
-import {
-  removeUserlevel,
-  removeUsername,
-  removeUserSession,
-} from "../../config/Api";
 
 import "../dropdown/dropdown.css";
+import Modals from "./Modals";
 
 const clickOutsideRef = (content_ref, toggle_ref) => {
   document.addEventListener("mousedown", (e) => {
@@ -24,60 +21,65 @@ const clickOutsideRef = (content_ref, toggle_ref) => {
 };
 
 const Dropdown = (props) => {
+  const [show, setShow] = useState(false);
+
   const dropdown_toggle_el = useRef(null);
   const dropdown_content_el = useRef(null);
 
+  const handleOpen = () => setShow(true);
+  const handleClose = () => setShow(false);
+
   clickOutsideRef(dropdown_content_el, dropdown_toggle_el);
 
-  const history = useHistory();
-  function Delete() {
-    swal({
-      title: "Apa anda yakin ?",
-      text: "Apakah anda yakin ingin menghapus mata pelajaran ini?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        
-      }
-    });
-  }
-
   return (
-    <div className="dropdown" style={{position:"absolute"}}>
-      <button ref={dropdown_toggle_el} className="dropdown__toggle">
-        {props.icon ? <i className={props.icon}></i> : ""}
-        {props.badge ? (
-          <span className="dropdown__toggle-badge">{props.badge}</span>
-        ) : (
-          ""
-        )}
-        {props.customToggle ? props.customToggle() : ""}
-      </button>
-      <div ref={dropdown_content_el} className="dropdown__content">
-        {/* {props.contentData && props.renderItems
+    <>
+      <div className="dropdown" style={{ position: "absolute" }}>
+        <button ref={dropdown_toggle_el} className="dropdown__toggle">
+          {props.icon ? <i className={props.icon}></i> : ""}
+          {props.badge ? (
+            <span className="dropdown__toggle-badge">{props.badge}</span>
+          ) : (
+            ""
+          )}
+          {props.customToggle ? props.customToggle() : ""}
+        </button>
+        <div ref={dropdown_content_el} className="dropdown__content">
+          {/* {props.contentData && props.renderItems
           ? props.contentData.map((item, index) =>
               props.renderItems(item, index)
             )
           : ""} */}
-          <div className="notification-item" style={{cursor:"pointer"}}>
-            <i className="bx bx-edit"></i>
-            <span>Ubah</span>
-          </div>
-          <Link to="#" onClick={Delete()}>
-          <div className="notification-item" style={{cursor:"pointer"}}>
-            <i className="bx bx-trash"></i>
-            <span>Hapus</span>
-          </div>
+          <Link to="#">
+            <div
+              className="notification-item"
+              style={{ cursor: "pointer" }}
+              onClick={handleOpen}
+            >
+              <i className="bx bx-edit"></i>
+              <span>Ubah</span>
+            </div>
           </Link>
-        {props.renderFooter ? (
-          <div className="dropdown__footer">{props.renderFooter()}</div>
-        ) : (
-          ""
-        )}
+          <Link to="#" onClick={() => props.delete(props.id)}>
+            <div className="notification-item" style={{ cursor: "pointer" }}>
+              <i className="bx bx-trash"></i>
+              <span>Hapus</span>
+            </div>
+          </Link>
+          {props.renderFooter ? (
+            <div className="dropdown__footer">{props.renderFooter()}</div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    </div>
+      <Modals
+        refresh={props.refresh}
+        modalShow={show}
+        close={handleClose}
+        data={props.data}
+        teacher={props.teacher}
+      />
+    </>
   );
 };
 

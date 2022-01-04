@@ -65,7 +65,7 @@ const updateSubject = asyncHandler(async (req, res) => {
     const {
         nama_mapel,
         nama_guru,
-        attachment,
+        cover,
         penyunting,
     } = req.body
 
@@ -74,7 +74,7 @@ const updateSubject = asyncHandler(async (req, res) => {
     if (subject) {
         subject.nama_mapel = nama_mapel
         subject.nama_guru = nama_guru
-        subject.attachment = attachment
+        subject.cover = cover
         subject.penyunting = penyunting
 
         const updatedSubject = await subject.save()
