@@ -6,6 +6,7 @@ import axios from "axios";
 import CardMapel from "../components/subject/CardMapel";
 import FormSubject from "../components/subject/FormSubject";
 import { useCallback } from "react";
+import swal from "sweetalert";
 
 const Subject = () => {
   const [mapel, setMapel] = useState([]);
@@ -42,9 +43,45 @@ const Subject = () => {
     data();
   }, [data]);
 
+  const handleClick = async (id) => {
+    swal({
+      title: "Apa anda yakin menghapus mata pelajaran ini ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`/api/subject/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            console.log(res);
+            const newData = mapel.filter((data) => {
+              return data._id !== id;
+            });
+            setMapel(newData);
+          });
+        swal("Mata pelajaran berhasil dihapus", {
+          icon: "success",
+        });
+      } else {
+        swal("Mata pelajaran gagal dihapus");
+      }
+    });
+  };
+
   const perPage = 10;
   const displayMapel = mapel.map((item, index) => {
-    return <CardMapel mapel={item} key={index} />;
+    return (
+      <CardMapel
+        mapel={item}
+        teacher={teacher}
+        key={index}
+        refresh={data}
+        delete={handleClick}
+      />
+    );
   });
   return (
     <div>

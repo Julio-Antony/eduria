@@ -84,7 +84,7 @@ const FormSubject = (props) => {
               name="mapel"
               aria-invalid={errors.name ? "true" : "false"}
               {...register("mapel")}
-              placeholder="Mata Pelajar"
+              placeholder="Mata Pelajaran"
               onChange={(e) => setMapel(e.target.value)}
               required
             />

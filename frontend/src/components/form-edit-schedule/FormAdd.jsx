@@ -88,7 +88,7 @@ const FormAdd = (props) => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label for="exampleInputEmail1">Kelas</label>
+          <label htmlFor="exampleInputEmail1">Kelas</label>
           <Select
             closeMenuOnSelect={true}
             className="mt-1 mb-1"
@@ -101,7 +101,7 @@ const FormAdd = (props) => {
           />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Hari</label>
+          <label htmlFor="exampleInputPassword1">Hari</label>
           <Select
             closeMenuOnSelect={true}
             className="mt-1 mb-1"
@@ -114,7 +114,7 @@ const FormAdd = (props) => {
           />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Waktu</label>
+          <label htmlFor="exampleInputPassword1">Waktu</label>
           <Select
             closeMenuOnSelect={true}
             className="mt-1 mb-1"
@@ -127,7 +127,7 @@ const FormAdd = (props) => {
           />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Mata Pelajaran</label>
+          <label htmlFor="exampleInputPassword1">Mata Pelajaran</label>
           <Select
             closeMenuOnSelect={true}
             className="mt-1 mb-1"
