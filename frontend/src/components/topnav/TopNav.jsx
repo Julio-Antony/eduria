@@ -15,7 +15,6 @@ import user_image from "../../assets/images/tuat.png";
 import user_menu from "../../assets/JsonData/user_menus.json";
 
 const nama = localStorage.getItem("username");
-console.log(nama);
 
 const curr_user = {
   display_name: nama,

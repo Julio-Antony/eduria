@@ -25,7 +25,6 @@ const SidebarItem = (props) => {
 
 const Sidebar = (props) => {
   const level = getLevel();
-  console.log(level);
 
   const activeItem = sidebar_items.findIndex(
     (item) => item.route === props.location.pathname
