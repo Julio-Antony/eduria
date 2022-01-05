@@ -12,7 +12,7 @@
     {
         "display_name": "Kelas",
         "route": "/kelas",
-        "icon": "bx bx-package"
+        "icon": "bx bx-chalkboard"
     },
     {
         "display_name": "Mata Pelajaran",
