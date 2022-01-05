@@ -13,7 +13,7 @@ const FormSubject = (props) => {
   const [teacher, setTeacher] = useState("");
   const [tempImage, setTempImage] = useState(null);
   const [files, setFiles] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const {
     register,
     handleSubmit,

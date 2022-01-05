@@ -24,7 +24,7 @@ const users = [
   },
   {
     email: "misyiambar@eduria.local",
-    nama: "Misyi Ambar",
+    nama: "Misyi Ambyar",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "islam",
@@ -43,7 +43,7 @@ const users = [
   },
   {
     email: "susimul@eduria.local",
-    nama: "Susi Mulyanti Arifani",
+    nama: "Susi Mulyanti Arifani, S.Kom",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "islam",
@@ -250,10 +250,9 @@ const users = [
     isVerified: true,
     level: "siswa"
   },
-
   {
-    email: "soraaoi@eduria.local",
-    nama: "Sora Aoi",
+    email: "gotouge@eduria.local",
+    nama: "Koyoharu Gotouge, MBA",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "Atheis",
@@ -271,8 +270,8 @@ const users = [
     level: "guru"
   },
   {
-    email: "mariaozawa@eduria.local",
-    nama: "Maria Ozawa",
+    email: "yuki@eduria.local",
+    nama: "Yuki Kajiura,BE",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "Atheis",
@@ -290,8 +289,8 @@ const users = [
     level: "guru"
   },
   {
-    email: "kakeklegend@eduria.local",
-    nama: "Sugiono",
+    email: "kishimoto@eduria.local",
+    nama: "Masashi Kishimoto",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "Atheis",
@@ -309,8 +308,8 @@ const users = [
     level: "guru"
   },
   {
-    email: "mariatakagi@eduria.local",
-    nama: "Maria takagi",
+    email: "tsuchiya@eduria.local",
+    nama: "Tao Tsuchiya, SS,.M.Hum",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "Atheis",
@@ -347,8 +346,8 @@ const users = [
     level: "guru"
   },
   {
-    email: "aiuehara@eduria.local",
-    nama: "Ai Uehara",
+    email: "takahashi@eduria.local",
+    nama: "Takahashi Rie, MBA",
     password: bcrypt.hashSync('admin123', 10),
     identitas: {
       agama: "Atheis",
