@@ -34,6 +34,7 @@
     "nodemon": "^2.0.15",
     "react-bootstrap": "^2.1.0",
     "react-data-table-component": "^7.4.6",
+    "react-doc-viewer": "^0.1.5",
     "react-modal": "^3.14.4",
     "react-select": "^5.2.1"
   },
