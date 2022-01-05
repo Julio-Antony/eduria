@@ -97,10 +97,18 @@
   background: #333;
 }
 
-.silabus-panel{
+.silabus-panel {
   min-height: 70px;
   border-radius: 15px;
   margin-bottom: 30px;
-  background: var(--main-bg);
+  padding-bottom: 16px;
+  background: linear-gradient(to left, #237a57, #093028);
   box-shadow: var(--box-shadow);
+}
+
+.row-silabus {
+  background-color: #fff;
+  height: 60px !important;
+  border-top: 1px solid #999 !important;
+  border-bottom: 1px solid #999 !important;
 }
