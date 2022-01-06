@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChalkboardTeacher,
-  faFileUpload,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -23,7 +22,8 @@ const SubjectDetail = ({ match }) => {
   const [deskripsi, setDeskripsi] = useState("");
   const [tgl, setTgl] = useState("");
   const [discuss, setDiscuss] = useState([]);
-  const [attachment, setAttachment] = useState(null);
+  const [file, setFile] = useState("")
+  const [attachment, setAttachment] = useState("");
 
   const {
     register,
@@ -96,6 +96,24 @@ const SubjectDetail = ({ match }) => {
         console.log(err);
       });
   };
+
+  function onFileUpload(event) {
+    event.preventDefault();
+    setFile(event.target.value)
+    let file_reader = new FileReader();
+    let file = event.target.files[0];
+    // if (event.target.files.length !== 0) {
+    //   setAttachment(URL.createObjectURL(event.target.files[0]));
+    //   console.log(URL.createObjectURL(event.target.files[1]))
+    // }
+    file_reader.onload = () => {
+      setAttachment(file_reader.result.substr(file_reader.result.indexOf(",") + 1));
+    };
+
+    if (file) {
+      file_reader.readAsDataURL(file);
+    }
+  }
 
   return (
     <div className="row">
@@ -217,7 +235,7 @@ const SubjectDetail = ({ match }) => {
                                 {...register("customFile")}
                                 className="custom-file-input"
                                 id="customFile"
-                                onChange={(e) => console.log(e)}
+                                onChange={onFileUpload}
                               />
                               <label
                                 className="custom-file-label"
