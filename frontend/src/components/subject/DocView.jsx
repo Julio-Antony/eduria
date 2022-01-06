@@ -1,5 +1,5 @@
 import React from "react";
-import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
+import DocViewer from "react-doc-viewer";
 
 const DocView = (props) => {
   const docs = [{ uri: props.file }];

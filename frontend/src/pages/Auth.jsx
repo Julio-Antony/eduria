@@ -54,6 +54,23 @@ const Auth = () => {
           setUserSession(allData[0].data.token);
           localStorage.setItem("username", allData[0].data.nama);
           setUserlevel(allData[0].data.level);
+          const toActivity = {
+            nama_pengguna: allData[0].data.nama,
+            nama_aktivitas: "Login",
+            status: "Berhasil",
+          };
+          axios
+            .post("/api/activity", toActivity, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           if (allData[0].data.level === "admin") {
             history.push({
               pathname: "/dashboard",

@@ -107,8 +107,8 @@ const SubjectDetail = ({ match }) => {
                 case "no":
                   return (
                     <>
-                      {/* {attachment && <DocView file={attachment} />} */}
-                      <span className="d-flex d-inline">
+                      {attachment && <DocView file={attachment} />}
+                      <span className="d-flex d-inline mt-3">
                         <h4 className="subject-name">{subtitle}</h4>
                         <h4 className="ml-auto">
                           <FontAwesomeIcon icon={faChalkboardTeacher} />{" "}
