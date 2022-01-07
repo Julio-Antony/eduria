@@ -1,6 +1,5 @@
 import moment from "moment-timezone";
 import React, { useState } from "react";
-import Badge from "../badge/Badge";
 
 import "./table.css";
 

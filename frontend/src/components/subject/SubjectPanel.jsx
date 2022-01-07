@@ -1,8 +1,4 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { getToken } from "../../config/Api";
-import CardMapel from "./CardMapel";
+import React from "react";
 
 const SubjectPanel = (props) => {
   return (
