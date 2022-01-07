@@ -74,7 +74,7 @@ const Dropdown = (props) => {
         modalShow={show}
         close={handleClose}
         data={props.data}
-        teacher={props.teacher}
+        level={props.level}
       />
     </>
   );

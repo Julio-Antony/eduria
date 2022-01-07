@@ -1,8 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChalkboardTeacher,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChalkboardTeacher, faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { getToken } from "../config/Api";
@@ -22,7 +19,7 @@ const SubjectDetail = ({ match }) => {
   const [deskripsi, setDeskripsi] = useState("");
   const [tgl, setTgl] = useState("");
   const [discuss, setDiscuss] = useState([]);
-  const [file, setFile] = useState("")
+  const [file, setFile] = useState("");
   const [attachment, setAttachment] = useState("");
 
   const {
@@ -99,7 +96,7 @@ const SubjectDetail = ({ match }) => {
 
   function onFileUpload(event) {
     event.preventDefault();
-    setFile(event.target.value)
+    setFile(event.target.value);
     let file_reader = new FileReader();
     let file = event.target.files[0];
     // if (event.target.files.length !== 0) {
@@ -107,7 +104,9 @@ const SubjectDetail = ({ match }) => {
     //   console.log(URL.createObjectURL(event.target.files[1]))
     // }
     file_reader.onload = () => {
-      setAttachment(file_reader.result.substr(file_reader.result.indexOf(",") + 1));
+      setAttachment(
+        file_reader.result.substr(file_reader.result.indexOf(",") + 1)
+      );
     };
 
     if (file) {
@@ -125,7 +124,7 @@ const SubjectDetail = ({ match }) => {
                 case "no":
                   return (
                     <>
-                      {attachment && <DocView file={attachment} />}
+                      {attachment && <DocView file={mapel.attachment} />}
                       <span className="d-flex d-inline mt-3">
                         <h4 className="subject-name">{subtitle}</h4>
                         <h4 className="ml-auto">
