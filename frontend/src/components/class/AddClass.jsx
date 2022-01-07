@@ -1,16 +1,16 @@
-import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import Select, { components } from "react-select";
-import swal from "sweetalert";
-import { getToken } from "../../config/Api";
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form';
+import Select, { components } from 'react-select';
+import swal from 'sweetalert';
+import { getToken } from '../../config/Api';
 
-const FormSubject = (props) => {
-  const [mapel, setMapel] = useState("");
-  const [teacher, setTeacher] = useState("");
+const AddClass = (props) => {
+    const [kelas, setKelas] = useState("");
+  const [walas, setWalas] = useState("");
+  const [jurusan, setJurusan] = useState("")
   const [tempImage, setTempImage] = useState(null);
   const [files, setFiles] = useState("");
   // const [error, setError] = useState("");
@@ -43,37 +43,38 @@ const FormSubject = (props) => {
   }
 
   function onFileSubmit() {
-    console.log(mapel);
     const data = JSON.stringify({
       cover: files,
-      nama_mapel: mapel,
-      nama_guru: teacher,
+      nama_kelas: kelas,
+      wali_kelas: walas,
+      jurusan: jurusan
     });
     axios
-      .post("/api/subject", data, {
+      .post("/api/class", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
+        props.refresh()
         const toActivity = {
-          nama_pengguna: localStorage.getItem("username"),
-          nama_aktivitas: "Menambah mata pelajaran",
-          status: "Berhasil",
-        };
-        axios
-          .post("/api/activity", toActivity, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            nama_pengguna: localStorage.getItem("username"),
+            nama_aktivitas: "Menambahkan kelas",
+            status: "Berhasil",
+          };
+          axios
+            .post("/api/activity", toActivity, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         swal("Kelas ditambahkan", {
           icon: "success",
         });
@@ -83,40 +84,62 @@ const FormSubject = (props) => {
       });
   }
 
-  let guruOptions = props.teacher.map(function (kelas) {
+  const jurusanOptions = [
+      {value:"Teknik Komputer & Jaringan", label:"Teknik Komputer & Jaringan"},
+      {value:"Teknik Audio Video", label:"Teknik Audio video"},
+      {value:"Teknik Instalasi Tenaga Listrik", label:"Teknik Instalasi Tenaga Listrik"},
+      {value:"Teknik Otomotif Kendaraan Ringan", label:"Teknik Otomotif Kendaraan Ringan"},
+      {value:"Teknik Otomotif Sepeda Motor", label:"Teknik Otomotif Sepeda Motor"},
+      {value:"Teknik Otomotif Alat Berat", label:"Teknik Otomotif Alat Berat"},
+  ]
+
+  let guruOptions = props.walas.map(function (kelas) {
     return { value: kelas.nama, label: kelas.nama };
   });
 
-  return (
-    <div className="card full-height">
-      <div className="card__header">
-        <h5 className="mb-5">Buat Mata Pelajaran</h5>
-        <form onSubmit={handleSubmit(onFileSubmit)}>
+    return (
+        <div className="card full-height">
+            <div className="card__header">
+                <h5 className="mb-3">Tambah Kelas</h5>
+                <form onSubmit={handleSubmit(onFileSubmit)}>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Nama mata pelajaran</label>
+            <label htmlFor="exampleInputEmail1">Nama Kelas</label>
             <input
               className="form-control"
               type="text"
-              id="mapel"
-              name="mapel"
+              id="kelas"
+              name="kelas"
               aria-invalid={errors.name ? "true" : "false"}
-              {...register("mapel")}
-              placeholder="Mata Pelajaran"
-              onChange={(e) => setMapel(e.target.value)}
+              {...register("kelas")}
+              placeholder="Kelas"
+              onChange={(e) => setKelas(e.target.value)}
               required
             />
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Nama guru</label>
+            <label for="exampleInputPassword1">Nama Wali Kelas</label>
             <Select
               closeMenuOnSelect={true}
               className="mt-1 mb-1"
               components={{ Placeholder }}
-              placeholder={"Guru"}
+              placeholder={"Wali Kelas"}
               maxMenuHeight={135}
               isSingle
               options={guruOptions}
-              onChange={(e) => setTeacher(e.value)}
+              onChange={(e) => setWalas(e.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label for="exampleInputPassword1">Nama Jurusan</label>
+            <Select
+              closeMenuOnSelect={true}
+              className="mt-1 mb-1"
+              components={{ Placeholder }}
+              placeholder={"Jurusan"}
+              maxMenuHeight={135}
+              isSingle
+              options={jurusanOptions}
+              onChange={(e) => setJurusan(e.value)}
             />
           </div>
           <div className="cover-area d-flex mb-3">
@@ -166,9 +189,9 @@ const FormSubject = (props) => {
             Submit
           </button>
         </form>
-      </div>
-    </div>
-  );
-};
+            </div>
+        </div>
+    )
+}
 
-export default FormSubject;
+export default AddClass
