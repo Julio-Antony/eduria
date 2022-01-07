@@ -67,6 +67,7 @@ const updateClass = asyncHandler(async (req, res) => {
         nama_kelas,
         wali_kelas,
         jurusan,
+        id_walas,
         cover,
         penyunting,
     } = req.body
@@ -74,10 +75,11 @@ const updateClass = asyncHandler(async (req, res) => {
     const kelas = await Kelas.findById(req.params.id)
 
     if (kelas) {
-        kelas.nama_kelas = nama_kelas
-        kelas.wali_kelas = wali_kelas
-        kelas.cover = cover
-        kelas.jurusan = jurusan
+        kelas.nama_kelas = nama_kelas || kelas.nama_kelas
+        kelas.wali_kelas = wali_kelas || kelas.wali_kelas
+        kelas.id_walas = id_walas || kelas.id_walas
+        kelas.cover = cover || kelas.cover
+        kelas.jurusan = jurusan || kelas.jurusan
         kelas.penyunting = penyunting
 
         const updatedClass = await kelas.save()

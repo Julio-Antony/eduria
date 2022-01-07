@@ -1,0 +1,54 @@
+.class-detail-section {
+  border-radius: 15px;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.class-detail-header {
+  overflow: hidden;
+  height: 40vh;
+}
+
+.class-cover {
+  position: relative;
+  border-radius: 15px 15px 0 0;
+  height: auto;
+  width: 100%;
+}
+
+.header-overlay {
+  position: absolute;
+  z-index: 2;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.img-walas {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+  border: 5px solid #237a57;
+}
+
+.img-walas img {
+  width: 100%;
+  height: auto;
+}
+
+.header-overlay h1 {
+  margin-left: 100px;
+  color: #fff;
+  font-size: 70px;
+  text-align: center;
+}
+
+.header-overlay h3 {
+  margin-left: 100px;
+  color: #fbb034;
+}
+
+.header-overlay p {
+  margin-left: 100px;
+  color: #000;
+}

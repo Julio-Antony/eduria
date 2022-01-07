@@ -10,6 +10,7 @@ const kelasSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    id_walas: String,
     wali_kelas: {
         type: String,
         required: true

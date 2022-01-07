@@ -53,6 +53,7 @@ const Auth = () => {
           setLoading(false);
           setUserSession(allData[0].data.token);
           localStorage.setItem("username", allData[0].data.nama);
+          localStorage.setItem("foto", allData[0].data.foto);
           setUserlevel(allData[0].data.level);
           const toActivity = {
             nama_pengguna: allData[0].data.nama,

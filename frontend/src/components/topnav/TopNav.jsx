@@ -10,9 +10,10 @@ import ThemeMenu from "../thememenu/ThemeMenu";
 
 import notifications from "../../assets/JsonData/notification.json";
 
-import user_image from "../../assets/images/tuat.png";
-
 const nama = localStorage.getItem("username");
+const user_image = localStorage.getItem("foto");
+
+console.log(user_image);
 
 const curr_user = {
   display_name: nama,
@@ -29,7 +30,7 @@ const renderNotificationItem = (item, index) => (
 const renderUserToggle = (user) => (
   <div className="topnav__right-user">
     <div className="topnav__right-user__image">
-      <img src={user.image} alt="" />
+      <img src={"data:image/png;base64," + user.image} alt="" />
     </div>
     <div className="topnav__right-user__name">{user.display_name}</div>
   </div>
