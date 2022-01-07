@@ -3,11 +3,6 @@ import React, { useState } from "react";
 
 import "./table.css";
 
-const activityStatus = {
-  Gagal: "danger",
-  Berhasil: "success",
-};
-
 const TableActivity = (props) => {
   const activity = props.activity || [];
 
@@ -60,13 +55,13 @@ const TableActivity = (props) => {
                   <td>{item.nama_aktivitas}</td>
                   <td>
                     {moment(item.createdAt.substring(0, 16))
-                      .tz("Asia/Jakarta")
+                      .tz("Pacific/Honolulu")
                       .format("YYYY-MM-DD HH:mm")}
                   </td>
                   <td>
                     <span
                       class={
-                        item.status == "Gagal"
+                        item.status === "Gagal"
                           ? "badge badge-danger"
                           : "badge badge-success"
                       }

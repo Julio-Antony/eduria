@@ -112,3 +112,8 @@
   border-top: 1px solid #999 !important;
   border-bottom: 1px solid #999 !important;
 }
+
+.close-modal-btn:hover{
+  color: red;
+  cursor: pointer;
+}

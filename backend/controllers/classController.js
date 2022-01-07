@@ -49,6 +49,8 @@ const createClass = asyncHandler(async (req, res) => {
     const kelas = new Kelas({
         nama_kelas: req.body.nama_kelas,
         wali_kelas: req.body.wali_kelas,
+        cover: req.body.cover,
+        jurusan: req.body.jurusan,
         user: req.user._id,
     })
 
@@ -65,6 +67,7 @@ const updateClass = asyncHandler(async (req, res) => {
         nama_kelas,
         wali_kelas,
         jurusan,
+        cover,
         penyunting,
     } = req.body
 
@@ -73,6 +76,7 @@ const updateClass = asyncHandler(async (req, res) => {
     if (kelas) {
         kelas.nama_kelas = nama_kelas
         kelas.wali_kelas = wali_kelas
+        kelas.cover = cover
         kelas.jurusan = jurusan
         kelas.penyunting = penyunting
 
