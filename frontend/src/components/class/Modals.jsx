@@ -1,17 +1,18 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { Modal } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import swal from 'sweetalert';
-import { getToken } from '../../config/Api';
+import axios from "axios";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import { getToken } from "../../config/Api";
 import Select, { components } from "react-select";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 const Modals = (props) => {
-    const [kelas, setKelas] = useState(props.data.nama_kelas);
+  const [kelas, setKelas] = useState(props.data.nama_kelas);
   const [walas, setWalas] = useState(props.data.wali_kelas);
-  const [jurusan, setJurusan] = useState(props.data.jurusan)
+  const [idWalas, setIdWalas] = useState("");
+  const [jurusan, setJurusan] = useState(props.data.jurusan);
   const [tempImage1, setTempImage1] = useState(null);
   const [files1, setFiles1] = useState("");
   const [error, setError] = useState("");
@@ -21,7 +22,7 @@ const Modals = (props) => {
     formState: { errors },
   } = useForm();
 
-  console.log(props.walas)
+  console.log(props.walas);
 
   const Placeholder = (props) => {
     return <components.Placeholder {...props} />;
@@ -51,6 +52,8 @@ const Modals = (props) => {
     console.log(kelas);
     const data = JSON.stringify({
       cover: files1,
+      id_walas: idWalas,
+      jurusan: jurusan,
       nama_kelas: kelas,
       wali_kelas: walas,
     });
@@ -93,12 +96,43 @@ const Modals = (props) => {
     return { value: walas.nama, label: walas.nama };
   });
 
-  const defValWalas = walasOptions.filter(
-    (option) => option.value === walas
+  const jurusanOptions = [
+    {
+      value: "Teknik Komputer & Jaringan",
+      label: "Teknik Komputer & Jaringan",
+    },
+    { value: "Teknik Audio Video", label: "Teknik Audio video" },
+    {
+      value: "Teknik Instalasi Tenaga Listrik",
+      label: "Teknik Instalasi Tenaga Listrik",
+    },
+    {
+      value: "Teknik Otomotif Kendaraan Ringan",
+      label: "Teknik Otomotif Kendaraan Ringan",
+    },
+    {
+      value: "Teknik Otomotif Sepeda Motor",
+      label: "Teknik Otomotif Sepeda Motor",
+    },
+    {
+      value: "Teknik Otomotif Alat Berat",
+      label: "Teknik Otomotif Alat Berat",
+    },
+  ];
+
+  const defValWalas = walasOptions.filter((option) => option.value === walas);
+  const defValJurusan = jurusanOptions.filter(
+    (option) => option.value === jurusan
   );
 
-    return (
-        <Modal size="md" show={props.modalShow} onHide={props.close} centered>
+  const changeWalas = (e) => {
+    setWalas(e.value);
+    const getId = props.walas.find((data) => data.nama === e.value);
+    setIdWalas(getId._id);
+  };
+
+  return (
+    <Modal size="md" show={props.modalShow} onHide={props.close} centered>
       <div className="modal-header">
         <h3>Ubah data kelas</h3>
         <span onClick={props.close} className="close-modal-btn">
@@ -124,6 +158,20 @@ const Modals = (props) => {
               />
             </div>
             <div className="form-group">
+              <label for="exampleInputPassword1">Jurusan</label>
+              <Select
+                closeMenuOnSelect={true}
+                className="mt-1 mb-1"
+                components={{ Placeholder }}
+                placeholder={"Jurusan"}
+                maxMenuHeight={135}
+                isSingle
+                value={defValJurusan}
+                options={jurusanOptions}
+                onChange={(e) => setJurusan(e.value)}
+              />
+            </div>
+            <div className="form-group">
               <label for="exampleInputPassword1">Nama Wali Kelas</label>
               <Select
                 closeMenuOnSelect={true}
@@ -134,7 +182,7 @@ const Modals = (props) => {
                 isSingle
                 value={defValWalas}
                 options={walasOptions}
-                onChange={(e) => setWalas(e.value)}
+                onChange={changeWalas}
               />
             </div>
             <div className="cover-area d-flex mb-3">
@@ -187,7 +235,7 @@ const Modals = (props) => {
         </div>
       </div>
     </Modal>
-    )
-}
+  );
+};
 
-export default Modals
+export default Modals;

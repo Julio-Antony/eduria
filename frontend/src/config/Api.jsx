@@ -28,6 +28,10 @@ export const removeUserlevel = () => {
   localStorage.removeItem("level");
 };
 
+export const removeUserImage = () => {
+  localStorage.removeItem("foto");
+};
+
 export const setUsername = (username) => {
   localStorage.setItem("username", username);
 };
