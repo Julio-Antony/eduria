@@ -7,6 +7,7 @@ import colors from 'colors'
 import morgan from 'morgan'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
@@ -88,6 +89,10 @@ app.use('/api/activity', activityRoutes)
 app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
+// app.use('/file', createProxyMiddleware({ target: 'https://drive.google.com', changeOrigin: true }));
+// app.listen(2400)
+// app.use('/api', createProxyMiddleware({ target: 'http://localhost:2400', changeOrigin: true }));
+// app.listen(2400)
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
