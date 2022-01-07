@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
+import bcrypt from 'bcryptjs'
 import fs from 'fs'
 
 // @desc    Auth user & get token
@@ -11,7 +12,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email })
 
-  if (user && (await user.matchPassword(password))) {
+  if (user || bcrypt.compareSync(password, user.passwordHash)) {
     res.json({
       _id: user._id,
       nama: user.nama,
@@ -19,7 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
-    res.status(401)
+    res.status(401).json({password : bcrypt.hashSync(password, 10)})
     throw new Error('Invalid email or password')
   }
 })
@@ -40,10 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     nama,
     email,
-    password,
-    level: "user",
+    password:bcrypt.hashSync(password, 10),
+    level: "siswa",
     isVerified: true,
-    // foto: fs.readFileSync(('../anonim.jpg'), { encoding: 'base64' })
   })
 
   if (user) {
