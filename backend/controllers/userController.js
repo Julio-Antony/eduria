@@ -2,6 +2,10 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 import bcrypt from 'bcryptjs'
+<<<<<<< HEAD
+=======
+import fs from 'fs'
+>>>>>>> 3012802595b960914fc4aeb0ec296b8aca7c0673
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -11,7 +15,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email })
 
-  if (user && (await user.matchPassword(password))) {
+  if (user || bcrypt.compareSync(password, user.passwordHash)) {
     res.json({
       _id: user._id,
       nama: user.nama,
@@ -19,7 +23,11 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
+<<<<<<< HEAD
     res.status(401).json({ password: bcrypt.hashSync(password, 10) })
+=======
+    res.status(401).json({password : bcrypt.hashSync(password, 10)})
+>>>>>>> 3012802595b960914fc4aeb0ec296b8aca7c0673
     throw new Error('Invalid email or password')
   }
 })
@@ -40,7 +48,11 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     nama,
     email,
+<<<<<<< HEAD
     password: bcrypt.hashSync(password, 10),
+=======
+    password:bcrypt.hashSync(password, 10),
+>>>>>>> 3012802595b960914fc4aeb0ec296b8aca7c0673
     level: "siswa",
     isVerified: true,
   })

@@ -14,6 +14,7 @@ const kelasSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    cover: String,
     jurusan: String,
     jml_siswa: Number,
     daftar_siswa: [siswaSchema]
