@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
-import fs from 'fs'
+import bcrypt from 'bcryptjs'
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -19,7 +19,7 @@ const authUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
-    res.status(401)
+    res.status(401).json({ password: bcrypt.hashSync(password, 10) })
     throw new Error('Invalid email or password')
   }
 })
@@ -40,10 +40,9 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     nama,
     email,
-    password,
-    level: "user",
+    password: bcrypt.hashSync(password, 10),
+    level: "siswa",
     isVerified: true,
-    // foto: fs.readFileSync(('../anonim.jpg'), { encoding: 'base64' })
   })
 
   if (user) {
@@ -151,14 +150,14 @@ const updateUser = asyncHandler(async (req, res) => {
     user.nama = req.body.nama || user.nama
     user.email = req.body.email || user.email
     user.level = req.body.level || user.level
-    // user.foto = fs.readFileSync(req.body.foto, { encoding: 'base64' }) || user.foto
-    user.identitas.no_induk = req.body.identitas.no_induk || user.identitas.no_induk
-    user.identitas.jenis_kelamin = req.body.identitas.jenis_kelamin || user.identitas.jenis_kelamin
-    user.identitas.agama = req.body.identitas.agama || user.identitas.agama
-    user.identitas.tempat_lahir = req.body.identitas.tempat_lahir || user.identitas.tempat_lahir
-    user.identitas.tanggal_lahir = req.body.identitas.tanggal_lahir || user.identitas.tanggal_lahir
-    user.identitas.no_telepon = req.body.identitas.no_telepon || user.identitas.no_telepon
-    user.identitas.alamat = req.body.identitas.alamat || user.identitas.alamat
+    user.foto = req.body.foto || user.foto
+    // user.identitas.no_induk = req.body.identitas.no_induk || user.identitas.no_induk
+    // user.identitas.jenis_kelamin = req.body.identitas.jenis_kelamin || user.identitas.jenis_kelamin
+    // user.identitas.agama = req.body.identitas.agama || user.identitas.agama
+    // user.identitas.tempat_lahir = req.body.identitas.tempat_lahir || user.identitas.tempat_lahir
+    // user.identitas.tanggal_lahir = req.body.identitas.tanggal_lahir || user.identitas.tanggal_lahir
+    // user.identitas.no_telepon = req.body.identitas.no_telepon || user.identitas.no_telepon
+    // user.identitas.alamat = req.body.identitas.alamat || user.identitas.alamat
 
     const updatedUser = await user.save()
 
