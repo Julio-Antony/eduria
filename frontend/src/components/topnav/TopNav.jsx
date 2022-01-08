@@ -13,8 +13,6 @@ import notifications from "../../assets/JsonData/notification.json";
 const nama = localStorage.getItem("username");
 const user_image = localStorage.getItem("foto");
 
-console.log(user_image);
-
 const curr_user = {
   display_name: nama,
   image: user_image,

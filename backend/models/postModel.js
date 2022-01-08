@@ -6,7 +6,7 @@ const komentar = mongoose.Schema({
         require: true,
         ref: 'User'
     },
-    nama_user:String,
+    nama_user: String,
     statement: String,
 })
 
@@ -31,6 +31,7 @@ const model = mongoose.Schema({
     },
     gambar: String,
     suka: Number,
+
     komentar: [komentar]
 }, {
     timestamps: true

@@ -63,6 +63,7 @@ const createPost = asyncHandler(async (req, res) => {
         isi: req.body.isi,
         pembuat: req.body.pembuat,
         lampiran: req.body.lampiran,
+        gambar: req.body.gambar,
         user: req.user._id,
     })
 

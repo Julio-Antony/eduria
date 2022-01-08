@@ -154,6 +154,10 @@ input:focus {
   text-transform: capitalize;
 }
 
+.img-container img {
+  max-width: 100%;
+}
+
 .normal-background {
   background-color: var(--main-bg-light);
   color: #f69110;
