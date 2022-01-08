@@ -1,6 +1,6 @@
 import axios from "axios";
 import moment from "moment-timezone";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { getToken } from "../config/Api";
 
@@ -33,20 +33,47 @@ const Log = () => {
   const [loading, setLoading] = useState(false);
   const [totalRows, setTotalRows] = useState(0);
 
-  const fetchUsers = async (page) => {
-    setLoading(true);
+  // const fetchUsers = async (page) => {
+  //   setLoading(true);
 
-    const response = await axios.get(`/api/activity?pageNumber=${page}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  //   const response = await axios.get(`/api/activity?pageNumber=${page}`, {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   });
 
-    setData(response.data.aktivitas);
-    setTotalRows(response.data.count);
-    setLoading(false);
-  };
+  //   setData(response.data.aktivitas);
+  //   setTotalRows(response.data.count);
+  //   setLoading(false);
+  // };
+
+  const fetchdata = useCallback(
+    (page) => {
+      setLoading(true);
+
+      const activityUrl = `/api/activity?pageNumber=${page}`;
+
+      const activity = axios.get(activityUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      axios
+        .all([activity])
+        .then(
+          axios.spread((...allData) => {
+            console.log(allData[0].data);
+            setData(allData[0].data.aktivitas);
+            setTotalRows(allData[0].data.count);
+            setLoading(false);
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    [token]
+  );
 
   const handlePageChange = (page) => {
-    fetchUsers(page);
+    fetchdata(page);
   };
 
   const handlePerRowsChange = async (page) => {
@@ -61,8 +88,8 @@ const Log = () => {
   };
 
   useEffect(() => {
-    fetchUsers(1); // fetch page 1 of users
-  }, []);
+    fetchdata(1); // fetch page 1 of users
+  }, [fetchdata]);
 
   function convertArrayOfObjectsToCSV(array) {
     let result;
@@ -70,6 +97,7 @@ const Log = () => {
     const columnDelimiter = ",";
     const lineDelimiter = "\n";
     const keys = Object.keys(data);
+    console.log(data);
 
     result = "";
     result += keys.join(columnDelimiter);
@@ -117,7 +145,7 @@ const Log = () => {
   );
   const actionsMemo = React.useMemo(
     () => <Export onExport={() => downloadCSV(data)} />,
-    []
+    [data, downloadCSV]
   );
 
   return (
