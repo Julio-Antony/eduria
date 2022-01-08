@@ -28,7 +28,7 @@ const CardUser = (props) => {
       <div className="card-mapel-body text-center">
         <h6>{props.user.nama}</h6>
         <p>{props.user.level}</p>
-        <Link to={`/subject_detail/${props.user._id}`}>
+        <Link to={`/user_detail/${props.user._id}`}>
           <button className="btn">Detail</button>
         </Link>
       </div>

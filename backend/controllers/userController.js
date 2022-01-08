@@ -152,13 +152,13 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email
     user.level = req.body.level || user.level
     user.foto = req.body.foto || user.foto
-    // user.identitas.no_induk = req.body.identitas.no_induk || user.identitas.no_induk
-    // user.identitas.jenis_kelamin = req.body.identitas.jenis_kelamin || user.identitas.jenis_kelamin
-    // user.identitas.agama = req.body.identitas.agama || user.identitas.agama
-    // user.identitas.tempat_lahir = req.body.identitas.tempat_lahir || user.identitas.tempat_lahir
-    // user.identitas.tanggal_lahir = req.body.identitas.tanggal_lahir || user.identitas.tanggal_lahir
-    // user.identitas.no_telepon = req.body.identitas.no_telepon || user.identitas.no_telepon
-    // user.identitas.alamat = req.body.identitas.alamat || user.identitas.alamat
+    user.identitas.no_induk = req.body.no_induk || user.identitas.no_induk
+    user.identitas.jenis_kelamin = req.body.jenis_kelamin || user.identitas.jenis_kelamin
+    user.identitas.agama = req.body.agama || user.identitas.agama
+    user.identitas.tempat_lahir = req.body.tempat_lahir || user.identitas.tempat_lahir
+    user.identitas.tanggal_lahir = req.body.tanggal_lahir || user.identitas.tanggal_lahir
+    user.identitas.no_telepon = req.body.no_telepon || user.identitas.no_telepon
+    user.identitas.alamat = req.body.alamat || user.identitas.alamat
 
     const updatedUser = await user.save()
 

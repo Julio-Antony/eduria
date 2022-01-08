@@ -139,7 +139,7 @@ const FormAdd = (props) => {
             onChange={(e) => setMapel(e.value)}
           />
         </div>
-        <button type="submit" className="btn btn-form">
+        <button type="submit" className="btn btn-success">
           Buat
         </button>
       </form>

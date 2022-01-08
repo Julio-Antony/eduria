@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema(
     foto: String,
     isVerified: Boolean,
     identitas: {
-      no_induk: Number,
+      no_induk: String,
       kelas: [kelasSchema],
       jenis_kelamin: String,
       agama: String,
