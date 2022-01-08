@@ -20,11 +20,11 @@ const getAllActivity = asyncHandler(async (req, res) => {
 
     const count = await Aktivitas.countDocuments({ ...keyword })
     const aktivtasCount = await Aktivitas.count({})
-    const aktivitas = await Aktivitas.find({ ...keyword })
+    const aktivitas = await Aktivitas.find({ ...keyword }).sort({ 'createdAt': -1 })
         .limit(pageSize)
         .skip(pageSize * (page - 1))
 
-    res.json({ message: "ditemukan " + aktivtasCount + " Aktivitas", aktivitas, page, pages: Math.ceil(count / pageSize) })
+    res.json({ message: "ditemukan " + aktivtasCount + " Aktivitas", count: aktivtasCount, aktivitas, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Create a Activity
