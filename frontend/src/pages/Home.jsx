@@ -37,21 +37,21 @@ const Home = () => {
 
   const handleClick = async (id) => {
     swal({
-      title: "Apa anda yakin menghapus pengguna ini ?",
+      title: "Apa anda yakin menghapus pengumuman ini ?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete(`/api/users/${id}`, {
+          .delete(`/api/posts/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((res) => {
             console.log(res);
             const toActivity = {
               nama_pengguna: localStorage.getItem("username"),
-              nama_aktivitas: "Menghapus Pengguna",
+              nama_aktivitas: "Menghapus Pengumuman",
               status: "Berhasil",
             };
             axios
@@ -71,11 +71,11 @@ const Home = () => {
             });
             setPengumuman(newData);
           });
-        swal("Pengguna berhasil dihapus", {
+        swal("Pengumuman berhasil dihapus", {
           icon: "success",
         });
       } else {
-        swal("Mata pelajaran gagal dihapus");
+        swal("Pengumuman gagal dihapus");
       }
     });
   };
@@ -101,7 +101,9 @@ const Home = () => {
           <PostPanel display={displayUser} pengumuman={pengumuman} />
         </div>
         <div className="col-md-4">
-          <AddPost refresh={data} />
+          {localStorage.getItem("level") === "admin" && (
+            <AddPost refresh={data} />
+          )}
         </div>
       </div>
     </div>

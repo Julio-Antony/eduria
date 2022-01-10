@@ -1,16 +1,16 @@
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
-import Select, { components } from 'react-select';
-import swal from 'sweetalert';
-import { getToken } from '../../config/Api';
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Select, { components } from "react-select";
+import swal from "sweetalert";
+import { getToken } from "../../config/Api";
 
 const AddClass = (props) => {
-    const [kelas, setKelas] = useState("");
+  const [kelas, setKelas] = useState("");
   const [walas, setWalas] = useState("");
-  const [jurusan, setJurusan] = useState("")
+  const [jurusan, setJurusan] = useState("");
   const [tempImage, setTempImage] = useState(null);
   const [files, setFiles] = useState("");
   // const [error, setError] = useState("");
@@ -47,7 +47,7 @@ const AddClass = (props) => {
       cover: files,
       nama_kelas: kelas,
       wali_kelas: walas,
-      jurusan: jurusan
+      jurusan: jurusan,
     });
     axios
       .post("/api/class", data, {
@@ -57,24 +57,24 @@ const AddClass = (props) => {
         },
       })
       .then((res) => {
-        props.refresh()
+        props.refresh();
         const toActivity = {
-            nama_pengguna: localStorage.getItem("username"),
-            nama_aktivitas: "Menambahkan kelas",
-            status: "Berhasil",
-          };
-          axios
-            .post("/api/activity", toActivity, {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          nama_pengguna: localStorage.getItem("username"),
+          nama_aktivitas: "Menambahkan kelas",
+          status: "Berhasil",
+        };
+        axios
+          .post("/api/activity", toActivity, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         swal("Kelas ditambahkan", {
           icon: "success",
         });
@@ -85,23 +85,38 @@ const AddClass = (props) => {
   }
 
   const jurusanOptions = [
-      {value:"Teknik Komputer & Jaringan", label:"Teknik Komputer & Jaringan"},
-      {value:"Teknik Audio Video", label:"Teknik Audio video"},
-      {value:"Teknik Instalasi Tenaga Listrik", label:"Teknik Instalasi Tenaga Listrik"},
-      {value:"Teknik Otomotif Kendaraan Ringan", label:"Teknik Otomotif Kendaraan Ringan"},
-      {value:"Teknik Otomotif Sepeda Motor", label:"Teknik Otomotif Sepeda Motor"},
-      {value:"Teknik Otomotif Alat Berat", label:"Teknik Otomotif Alat Berat"},
-  ]
+    {
+      value: "Teknik Komputer & Jaringan",
+      label: "Teknik Komputer & Jaringan",
+    },
+    { value: "Teknik Audio Video", label: "Teknik Audio video" },
+    {
+      value: "Teknik Instalasi Tenaga Listrik",
+      label: "Teknik Instalasi Tenaga Listrik",
+    },
+    {
+      value: "Teknik Otomotif Kendaraan Ringan",
+      label: "Teknik Otomotif Kendaraan Ringan",
+    },
+    {
+      value: "Teknik Otomotif Sepeda Motor",
+      label: "Teknik Otomotif Sepeda Motor",
+    },
+    {
+      value: "Teknik Otomotif Alat Berat",
+      label: "Teknik Otomotif Alat Berat",
+    },
+  ];
 
   let guruOptions = props.walas.map(function (kelas) {
     return { value: kelas.nama, label: kelas.nama };
   });
 
-    return (
-        <div className="card full-height">
-            <div className="card__header">
-                <h5 className="mb-3">Tambah Kelas</h5>
-                <form onSubmit={handleSubmit(onFileSubmit)}>
+  return (
+    <div className="card">
+      <div className="card__header">
+        <h5 className="mb-3">Tambah Kelas</h5>
+        <form onSubmit={handleSubmit(onFileSubmit)}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Nama Kelas</label>
             <input
@@ -189,9 +204,9 @@ const AddClass = (props) => {
             Submit
           </button>
         </form>
-            </div>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default AddClass
+export default AddClass;
