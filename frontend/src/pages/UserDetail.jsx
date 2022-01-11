@@ -6,6 +6,7 @@ import "../components/user/user.css";
 
 const UserDetail = ({ match }) => {
   const [user, setUser] = useState(null);
+  const [classes, setClasses] = useState([]);
   const token = getToken();
   const id = match.params.id;
 
@@ -13,17 +14,22 @@ const UserDetail = ({ match }) => {
 
   const data = useCallback(() => {
     const usersUrl = `/api/users/${id}`;
+    const kelasUrl = "/api/class";
 
     const users = axios.get(usersUrl, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
+    const kelas = axios.get(kelasUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     axios
-      .all([users])
+      .all([users, kelas])
       .then(
         axios.spread((...allData) => {
-          console.log(allData[0].data);
           setUser(allData[0].data);
+          setClasses(allData[1].data.kelas);
         })
       )
       .catch((err) => {
@@ -32,15 +38,17 @@ const UserDetail = ({ match }) => {
   }, [token, id]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Detail Pengguna");
     data();
   }, [data]);
   return (
     <div>
       <div>
-        <h2 className="page-header">Pengguna</h2>
         <div className="row">
           <div className="col-md-12">
-            {user && <IdentityPanel user={user} />}
+            {user && (
+              <IdentityPanel user={user} refresh={data} kelas={classes} />
+            )}
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@
 .header-overlay h1 {
   margin-left: 100px;
   color: #fff;
-  font-size: 70px;
+  font-size: 65px;
   text-align: center;
 }
 
@@ -51,4 +51,21 @@
 .header-overlay p {
   margin-left: 100px;
   color: #000;
+}
+
+.class-wrapper {
+  padding: 30px;
+}
+
+.user-image-wrapper {
+  height: 75px;
+  width: 75px;
+  margin: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-image-wrapper img {
+  height: auto;
+  width: 100%;
 }

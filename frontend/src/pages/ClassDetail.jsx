@@ -31,7 +31,11 @@ const ClassDetail = ({ match }) => {
       .then(
         axios.spread((...allData) => {
           setDataSiswa(
-            allData[1].data.filter((data) => data.level === "siswa")
+            allData[1].data.filter(
+              (data) =>
+                data.level === "siswa" &&
+                data.kelas === allData[0].data.nama_kelas
+            )
           );
           setDataKelas(allData[0].data);
           axios
@@ -52,6 +56,7 @@ const ClassDetail = ({ match }) => {
   }, [id, token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Detail Kelas");
     refresh();
   }, [refresh]);
 
@@ -115,7 +120,6 @@ const ClassDetail = ({ match }) => {
 
   return (
     <div className="container-fluid">
-      <h2>Detail Kelas</h2>
       <div className="class-detail-section">
         <div className="class-detail-header">
           <div className="header-overlay row">

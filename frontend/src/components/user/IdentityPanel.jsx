@@ -26,7 +26,7 @@ const IdentityPanel = (props) => {
           <div className="col-md-8">
             <table>
               <tbody>
-                {localStorage.getItem("level") === "siswa" && (
+                {props.user.level === "siswa" && (
                   <tr>
                     <th>Kelas</th>
                     <th>: {props.user.kelas ? props.user.kelas : "-"}</th>
@@ -71,6 +71,7 @@ const IdentityPanel = (props) => {
         modalShow={show}
         close={handleClose}
         data={props.user}
+        kelas={props.kelas}
       />
     </>
   );

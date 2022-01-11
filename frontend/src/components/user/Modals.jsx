@@ -12,8 +12,7 @@ const Modals = (props) => {
   // console.log(props);
   const [user, setUser] = useState(props.data.nama);
   const [level, setLevel] = useState(props.level);
-  const [tempImage1, setTempImage1] = useState(null);
-  const [files1, setFiles1] = useState("");
+  const [files1, setFiles1] = useState(props.data.foto);
   const [error, setError] = useState("");
   const {
     register,
@@ -31,9 +30,6 @@ const Modals = (props) => {
     event.preventDefault();
     let file_reader1 = new FileReader();
     let file1 = event.target.files[0];
-    if (event.target.files.length !== 0) {
-      setTempImage1(URL.createObjectURL(event.target.files[0]));
-    }
     file_reader1.onload = () => {
       setFiles1(
         file_reader1.result.substr(file_reader1.result.indexOf(",") + 1)
@@ -138,7 +134,7 @@ const Modals = (props) => {
               />
             </div>
             <div className="cover-area d-flex mb-3">
-              {tempImage1 === null ? (
+              {files1 === null ? (
                 <div className="mx-auto my-auto">
                   <form className="text-center">
                     <div className="form-group mx-sm-3 mb-2 mt-3">
@@ -157,7 +153,11 @@ const Modals = (props) => {
                 </div>
               ) : (
                 <div className="img-container">
-                  <img className="mx-auto" src={tempImage1} alt="face" />
+                  <img
+                    className="mx-auto"
+                    src={"data:image/png;base64," + files1}
+                    alt="face"
+                  />
                   <div className="middle">
                     <form className="text-center">
                       <div className="form-group mx-sm-3 mb-2 mt-3">

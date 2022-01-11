@@ -40,6 +40,7 @@ const Subject = () => {
   }, [token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Mata Kelas");
     data();
   }, [data]);
 
@@ -85,7 +86,6 @@ const Subject = () => {
   });
   return (
     <div>
-      <h2 className="page-header">Mata Pelajaran</h2>
       <div className="row">
         <div className="col-md-8">
           <SubjectPanel display={displayMapel} mapel={mapel} />

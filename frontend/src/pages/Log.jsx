@@ -88,6 +88,7 @@ const Log = () => {
   };
 
   useEffect(() => {
+    localStorage.setItem("page", "Log Aktivitas");
     fetchdata(1); // fetch page 1 of users
   }, [fetchdata]);
 
@@ -150,7 +151,6 @@ const Log = () => {
 
   return (
     <div>
-      <h2>Log Aktivitas</h2>
       <div className="card full-height">
         <div className="card__header">
           <DataTable

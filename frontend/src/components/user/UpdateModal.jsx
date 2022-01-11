@@ -12,7 +12,7 @@ const UpdateModal = (props) => {
   const [user, setUser] = useState(props.data.nama);
   const [level, setLevel] = useState(props.data.level);
   const [nip, setNip] = useState(props.data.identitas.no_induk);
-  const [kelas, setKelas] = useState(props.data.kelas || "");
+  const [kelas, setKelas] = useState(props.data.kelas);
   const [gender, setGender] = useState(props.data.identitas.jenis_kelamin);
   const [agama, setAgama] = useState(props.data.identitas.agama);
   const [tl, setTl] = useState(props.data.identitas.tempat_lahir);
@@ -52,6 +52,7 @@ const UpdateModal = (props) => {
     const data = JSON.stringify({
       foto: files1,
       nama: user,
+      kelas: kelas,
       level: level,
       no_induk: nip,
       jenis_kelamin: gender,
@@ -87,7 +88,6 @@ const UpdateModal = (props) => {
             console.log(err);
           });
         props.refresh();
-        props.close();
         swal("Informasi Pengguna diperbarui", {
           icon: "success",
         });
@@ -114,6 +114,12 @@ const UpdateModal = (props) => {
   const defValGender = genderOptions.filter(
     (option) => option.value === gender
   );
+
+  let kelasOptions = props.kelas.map(function (classes) {
+    return { value: classes.nama_kelas, label: classes.nama_kelas };
+  });
+
+  const defValKelas = kelasOptions.filter((option) => option.value === kelas);
 
   const agamaOptions = [
     { value: "Islam", label: "Islam" },
@@ -168,6 +174,20 @@ const UpdateModal = (props) => {
                     placeholder="No. Induk"
                     onChange={(e) => setNip(e.target.value)}
                     required
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="exampleInputPassword1">Kelas</label>
+                  <Select
+                    closeMenuOnSelect={true}
+                    className="mt-1 mb-1"
+                    components={{ Placeholder }}
+                    placeholder={"Kelas"}
+                    maxMenuHeight={135}
+                    isSingle
+                    value={defValKelas}
+                    options={kelasOptions}
+                    onChange={(e) => setKelas(e.value)}
                   />
                 </div>
                 <div className="form-group">
