@@ -3,18 +3,25 @@ import React, { useCallback, useEffect, useState } from "react";
 import swal from "sweetalert";
 import AddClass from "../components/class/AddClass";
 import CardClass from "../components/class/CardClass";
+import CardJadwal from "../components/class/CardJadwal";
 import ClassPanel from "../components/class/ClassPanel";
+import UserList from "../components/class/UserList";
+import WalasPanel from "../components/class/WalasPanel";
 import { getToken } from "../config/Api";
 
 const Class = () => {
-  const [kelas, setKelas] = useState([])
-  const [walas, setWalas] = useState([])
+  const [kelas, setKelas] = useState([]);
+  const [walas, setWalas] = useState([]);
+  const [siswa, setSiswa] = useState([]);
+  const [jadwal, setJadwal] = useState([]);
+  const [singleWalas, setSingleWalas] = useState({});
 
   const token = getToken();
 
   const data = useCallback(() => {
     const userUrl = "/api/users";
     const classesUrl = "/api/class";
+    const jadwalUrl = `/api/schedule/${localStorage.getItem("kelas")}`;
 
     const user = axios.get(userUrl, {
       headers: { Authorization: `Bearer ${token}` },
@@ -24,12 +31,29 @@ const Class = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
+    const schedule = axios.get(jadwalUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     axios
-      .all([user, classes])
+      .all([user, classes, schedule])
       .then(
         axios.spread((...allData) => {
-          console.log(allData[1].data);
+          setJadwal(allData[2].data);
+          const selectClass = allData[1].data.kelas.find(
+            (data) => data.nama_kelas === localStorage.getItem("kelas")
+          );
+          setSingleWalas(
+            allData[0].data.find((data) => data._id === selectClass.id_walas)
+          );
           setWalas(allData[0].data.filter((data) => data.level === "guru"));
+          setSiswa(
+            allData[0].data.filter(
+              (data) =>
+                data.level === "siswa" &&
+                data.kelas === localStorage.getItem("kelas")
+            )
+          );
           setKelas(allData[1].data.kelas);
         })
       )
@@ -40,6 +64,7 @@ const Class = () => {
 
   useEffect(() => {
     data();
+    localStorage.setItem("page", "Kelas");
   }, [data]);
 
   const handleClick = async (id) => {
@@ -61,23 +86,23 @@ const Class = () => {
             });
             setKelas(newData);
           });
-          const toActivity = {
-            nama_pengguna: localStorage.getItem("username"),
-            nama_aktivitas: "Menghapus kelas",
-            status: "Berhasil",
-          };
-          axios
-            .post("/api/activity", toActivity, {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+        const toActivity = {
+          nama_pengguna: localStorage.getItem("username"),
+          nama_aktivitas: "Menghapus kelas",
+          status: "Berhasil",
+        };
+        axios
+          .post("/api/activity", toActivity, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         swal("Kelas berhasil dihapus", {
           icon: "success",
         });
@@ -100,15 +125,35 @@ const Class = () => {
     );
   });
 
+  const displayJadwal = jadwal.map((item, index) => {
+    return <CardJadwal jadwal={item} key={index} />;
+  });
+
   return (
     <div>
-      <h2>Kelas</h2>
       <div className="row">
         <div className="col-md-8">
-          <ClassPanel display={displayMapel} kelas={kelas}/>
+          {localStorage.getItem("level") === "admin" && (
+            <ClassPanel
+              display={
+                localStorage.getItem("level") === "admin"
+                  ? displayMapel
+                  : displayJadwal
+              }
+              item={localStorage.getItem("level") === "admin" ? kelas : jadwal}
+            />
+          )}
         </div>
         <div className="col-md-4">
-          <AddClass walas={walas} refresh={data}/>
+          {localStorage.getItem("level") === "admin" && (
+            <AddClass walas={walas} refresh={data} />
+          )}
+          {localStorage.getItem("level") === "siswa" && (
+            <WalasPanel walas={singleWalas} />
+          )}
+          {localStorage.getItem("level") === "siswa" && (
+            <UserList siswa={siswa} />
+          )}
         </div>
       </div>
     </div>

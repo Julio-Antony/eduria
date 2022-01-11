@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema(
     },
     foto: String,
     isVerified: Boolean,
+    kelas: String,
     identitas: {
       no_induk: String,
       kelas: [kelasSchema],

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./topnav.css";
 
@@ -9,14 +9,6 @@ import Dropdown from "../dropdown/Dropdown";
 import ThemeMenu from "../thememenu/ThemeMenu";
 
 import notifications from "../../assets/JsonData/notification.json";
-
-const nama = localStorage.getItem("username");
-const user_image = localStorage.getItem("foto");
-
-const curr_user = {
-  display_name: nama,
-  image: user_image,
-};
 
 const renderNotificationItem = (item, index) => (
   <div className="notification-item" key={index}>
@@ -35,11 +27,26 @@ const renderUserToggle = (user) => (
 );
 
 const Topnav = () => {
+  const [nama, setNama] = useState("");
+  const [image, setImage] = useState("");
+  const [judul, setJudul] = useState("");
+
+  useEffect(() => {
+    setNama(localStorage.getItem("username"));
+    setImage(localStorage.getItem("foto"));
+    setJudul(localStorage.getItem("page"));
+  }, []);
+
+  const curr_user = {
+    display_name: nama,
+    image: image,
+  };
   return (
     <div className="topnav">
-      <div className="topnav__search">
-        <input type="text" placeholder="Cari disini..." />
-        <i className="bx bx-search"></i>
+      <div className="topnav__left">
+        {/* <input type="text" placeholder="Cari disini..." />
+        <i className="bx bx-search"></i> */}
+        <h2 className="page-header">{judul}</h2>
       </div>
       <div className="topnav__right">
         <div className="topnav__right-item">

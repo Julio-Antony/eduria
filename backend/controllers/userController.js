@@ -16,6 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       nama: user.nama,
       level: user.level,
+      kelas: user.kelas || "",
       foto: user.foto || "",
       token: generateToken(user._id),
     })
@@ -149,6 +150,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   if (user) {
     user.nama = req.body.nama || user.nama
+    user.kelas = req.body.kelas || user.kelas
     user.email = req.body.email || user.email
     user.level = req.body.level || user.level
     user.foto = req.body.foto || user.foto

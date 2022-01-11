@@ -31,6 +31,7 @@ const User = () => {
   }, [token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Pengguna");
     data();
   }, [data]);
 
@@ -94,7 +95,6 @@ const User = () => {
 
   return (
     <div>
-      <h2 className="page-header">Pengguna</h2>
       <div className="row">
         <div className="col-md-12">
           <UserPanel display={displayUser} user={user} />

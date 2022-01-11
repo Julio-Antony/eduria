@@ -64,6 +64,7 @@ const SubjectDetail = ({ match }) => {
   }, [id, token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Deatail Mata Pelajaran");
     refresh();
   }, [refresh]);
 
@@ -99,10 +100,6 @@ const SubjectDetail = ({ match }) => {
     setFile(event.target.value);
     let file_reader = new FileReader();
     let file = event.target.files[0];
-    // if (event.target.files.length !== 0) {
-    //   setAttachment(URL.createObjectURL(event.target.files[0]));
-    //   console.log(URL.createObjectURL(event.target.files[1]))
-    // }
     file_reader.onload = () => {
       setAttachment(
         file_reader.result.substr(file_reader.result.indexOf(",") + 1)
@@ -136,6 +133,7 @@ const SubjectDetail = ({ match }) => {
                         {mapel.nama_materi}
                       </h2>
                       <p>{mapel.deskripsi}</p>
+                      <p>{mapel.tanggal}</p>
                       <div className="line"></div>
                     </>
                   );

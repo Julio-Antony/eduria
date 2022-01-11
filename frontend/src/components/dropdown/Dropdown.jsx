@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import {
+  removeUserclass,
   removeUserImage,
   removeUserlevel,
   removeUsername,
@@ -44,6 +45,7 @@ const Dropdown = (props) => {
         removeUserlevel();
         removeUsername();
         removeUserImage();
+        removeUserclass();
         history.push("/");
       }
     });

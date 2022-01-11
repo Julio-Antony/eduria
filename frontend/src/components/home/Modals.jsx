@@ -50,7 +50,6 @@ const Modals = (props) => {
         },
       })
       .then((res) => {
-        localStorage.setItem("foto", files1);
         const toActivity = {
           nama_pengguna: localStorage.getItem("username"),
           nama_aktivitas: "Mengubah Pengumuman",

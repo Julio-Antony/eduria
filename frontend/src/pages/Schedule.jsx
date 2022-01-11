@@ -45,12 +45,12 @@ const Schedule = () => {
   }, [token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Jadwal Pelajaran");
     getData();
   }, [getData]);
 
   return (
     <div>
-      <h2 className="page-header">Penjadwalan</h2>
       <div className="row">
         <div className="col-md-4">
           <FormAdd class={classList} subject={subjectList} />

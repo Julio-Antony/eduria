@@ -32,6 +32,7 @@ const Home = () => {
   }, [token]);
 
   useEffect(() => {
+    localStorage.setItem("page", "Pengumuman");
     data();
   }, [data]);
 
@@ -95,7 +96,6 @@ const Home = () => {
 
   return (
     <div>
-      <h2 className="page-header">Pengumuman</h2>
       <div className="row">
         <div className="col-md-8">
           <PostPanel display={displayUser} pengumuman={pengumuman} />

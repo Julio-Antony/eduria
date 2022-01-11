@@ -32,6 +32,10 @@ export const removeUserImage = () => {
   localStorage.removeItem("foto");
 };
 
+export const removeUserclass = () => {
+  localStorage.removeItem("kelas");
+};
+
 export const setUsername = (username) => {
   localStorage.setItem("username", username);
 };

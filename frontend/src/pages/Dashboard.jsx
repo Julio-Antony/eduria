@@ -104,6 +104,7 @@ const Dashboard = () => {
   const token = getToken();
 
   useEffect(() => {
+    localStorage.setItem("page", "Dashboard");
     axios
       .get("/api/dashboard/", {
         headers: { Authorization: `Bearer ${token}` },
@@ -121,13 +122,15 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2 className="page-header">Dashboard</h2>
       <div className="row">
         <div className="col-md-6">
           <StatusCard count={result} />
         </div>
         <div className="col-md-6">
           <div className="card full-height">
+            <div className="card__header">
+              <h3>Aktivitas Login</h3>
+            </div>
             {/* chart */}
             <Chart
               options={
@@ -161,7 +164,7 @@ const Dashboard = () => {
               />
             </div>
             <div className="card__footer">
-              <Link to="/">Selengkapnya</Link>
+              <Link to="/user">Selengkapnya</Link>
             </div>
           </div>
         </div>
@@ -179,7 +182,7 @@ const Dashboard = () => {
               />
             </div>
             <div className="card__footer">
-              <Link to="/">Selengkapnya</Link>
+              <Link to="/aktivitas">Selengkapnya</Link>
             </div>
           </div>
         </div>
