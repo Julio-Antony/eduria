@@ -11,12 +11,15 @@ const FormAdd = (props) => {
   const [hari, setHari] = useState("");
   const [waktu, setWaktu] = useState("");
   const [mapel, setMapel] = useState("");
+  const [guru, setGuru] = useState("");
   const [submit, setSubmit] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  console.log(props.teacher);
 
   const Placeholder = (props) => {
     return <components.Placeholder {...props} />;
@@ -30,6 +33,10 @@ const FormAdd = (props) => {
 
   let subjectOptions = props.subject.map(function (subject) {
     return { value: subject.nama_mapel, label: subject.nama_mapel };
+  });
+
+  let teacherOptions = props.teacher.map(function (guru) {
+    return { value: guru.nama, label: guru.nama };
   });
 
   const hariOptions = [
@@ -55,6 +62,7 @@ const FormAdd = (props) => {
       hari: hari,
       waktu: waktu,
       mapel: mapel,
+      guru: guru,
     };
 
     axios
@@ -65,7 +73,7 @@ const FormAdd = (props) => {
         },
       })
       .then((res) => {
-        console.log(res);
+        props.refresh();
         swal("Jadwal ditambahkan", {
           icon: "success",
         });
@@ -137,6 +145,19 @@ const FormAdd = (props) => {
             isSingle
             options={subjectOptions}
             onChange={(e) => setMapel(e.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Guru</label>
+          <Select
+            closeMenuOnSelect={true}
+            className="mt-1 mb-1"
+            components={{ Placeholder }}
+            placeholder={"Guru"}
+            maxMenuHeight={135}
+            isSingle
+            options={teacherOptions}
+            onChange={(e) => setGuru(e.value)}
           />
         </div>
         <button type="submit" className="btn btn-success">

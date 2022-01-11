@@ -9,6 +9,7 @@ const Schedule = () => {
   const [classList, setClassList] = useState([]);
   const [subjectList, setSubjectList] = useState([]);
   const [scheduleList, setScheduleList] = useState([]);
+  const [teacherList, setTeacherList] = useState([]);
 
   const token = getToken();
 
@@ -16,6 +17,7 @@ const Schedule = () => {
     const kelasUrl = "/api/class";
     const subjectUrl = "/api/subject";
     const scheduleUrl = "/api/schedule?pageNumber=2";
+    const teacherUrl = "/api/users";
 
     const kelas = axios.get(kelasUrl, {
       headers: { Authorization: `Bearer ${token}` },
@@ -29,14 +31,20 @@ const Schedule = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
+    const teacher = axios.get(teacherUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     axios
-      .all([kelas, subject, schedule])
+      .all([kelas, subject, schedule, teacher])
       .then(
         axios.spread((...allData) => {
-          console.log(allData[2].data);
           setClassList(allData[0].data.kelas);
           setSubjectList(allData[1].data.subject);
           setScheduleList(allData[2].data.jadwal);
+          setTeacherList(
+            allData[3].data.filter((user) => user.level === "guru")
+          );
         })
       )
       .catch((err) => {
@@ -53,7 +61,12 @@ const Schedule = () => {
     <div>
       <div className="row">
         <div className="col-md-4">
-          <FormAdd class={classList} subject={subjectList} />
+          <FormAdd
+            class={classList}
+            subject={subjectList}
+            teacher={teacherList}
+            refresh={getData}
+          />
         </div>
         <div className="col-md-8">
           <Schedules class={classList} />

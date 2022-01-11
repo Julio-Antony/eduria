@@ -51,14 +51,13 @@ const createSchedule = asyncHandler(async (req, res) => {
         hari: req.body.hari,
         waktu: req.body.waktu,
         mapel: req.body.mapel,
+        id_mapel: req.body.id_mapel,
         user: req.user._id,
     })
 
-    const jadwalExists = await Jawdal.where('kelas', jadwal.kelas).where('hari', jadwal.hari).where('waktu', jadwal.waktu)
-
-    // const classExists = await Jawdal.findOne({ kelas })
-    // const hariExists = await Jawdal.findOne({ hari })
-    // const waktuExists = await Jawdal.findOne({ waktu })
+    const jadwalExists = await Jawdal.where('kelas', jadwal.kelas)
+        .where('hari', jadwal.hari)
+        .where('waktu', jadwal.waktu)
 
     if (jadwalExists.length > 0) {
         res.status(400).json(jadwalExists)
