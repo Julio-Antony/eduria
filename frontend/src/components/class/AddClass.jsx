@@ -132,7 +132,7 @@ const AddClass = (props) => {
             />
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Nama Wali Kelas</label>
+            <label htmlFor="exampleInputPassword1">Nama Wali Kelas</label>
             <Select
               closeMenuOnSelect={true}
               className="mt-1 mb-1"
@@ -145,7 +145,7 @@ const AddClass = (props) => {
             />
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Nama Jurusan</label>
+            <label htmlFor="exampleInputPassword1">Nama Jurusan</label>
             <Select
               closeMenuOnSelect={true}
               className="mt-1 mb-1"

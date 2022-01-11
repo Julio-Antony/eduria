@@ -39,6 +39,7 @@ const Class = () => {
       .all([user, classes, schedule])
       .then(
         axios.spread((...allData) => {
+          setKelas(allData[1].data.kelas);
           setJadwal(allData[2].data);
           const selectClass = allData[1].data.kelas.find(
             (data) => data.nama_kelas === localStorage.getItem("kelas")
@@ -54,7 +55,6 @@ const Class = () => {
                 data.kelas === localStorage.getItem("kelas")
             )
           );
-          setKelas(allData[1].data.kelas);
         })
       )
       .catch((err) => {
@@ -112,6 +112,8 @@ const Class = () => {
     });
   };
 
+  console.log(jadwal);
+
   const perPage = 10;
   const displayMapel = kelas.map((item, index) => {
     return (
@@ -125,23 +127,21 @@ const Class = () => {
     );
   });
 
-  const displayJadwal = jadwal.map((item, index) => {
-    return <CardJadwal jadwal={item} key={index} />;
-  });
+  const displayJadwal =
+    jadwal.length > 0 &&
+    jadwal.map((item, index) => {
+      return <CardJadwal jadwal={item} key={index} />;
+    });
 
   return (
     <div>
       <div className="row">
         <div className="col-md-8">
           {localStorage.getItem("level") === "admin" && (
-            <ClassPanel
-              display={
-                localStorage.getItem("level") === "admin"
-                  ? displayMapel
-                  : displayJadwal
-              }
-              item={localStorage.getItem("level") === "admin" ? kelas : jadwal}
-            />
+            <ClassPanel display={displayMapel} item={kelas} />
+          )}
+          {localStorage.getItem("level") === "siswa" && (
+            <ClassPanel display={displayJadwal} item={jadwal} />
           )}
         </div>
         <div className="col-md-4">

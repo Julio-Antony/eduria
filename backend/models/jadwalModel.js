@@ -7,7 +7,8 @@ const jadwalSchema = mongoose.Schema({
     },
     hari: String,
     waktu: String,
-    mapel: String
+    mapel: String,
+    id_mapel: String
 },
     {
         timestamps: true
