@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UserList = (props) => {
   console.log(props.siswa);
@@ -11,7 +12,12 @@ const UserList = (props) => {
         {props.siswa.length > 0 &&
           props.siswa.map((student, index) => (
             <div className="user-image-wrapper" key={index}>
-              <img src={"data:image/png;base64," + student.foto} alt="gambar" />
+              <Link to={`/user_detail/${student._id}`}>
+                <img
+                  src={"data:image/png;base64," + student.foto}
+                  alt="gambar"
+                />
+              </Link>
             </div>
           ))}
       </div>
