@@ -28,7 +28,7 @@ const CardMapel = (props) => {
         <h6>{props.mapel.nama_mapel}</h6>
         <p>{props.mapel.nama_guru}</p>
         <Link to={`/subject_detail/${props.mapel._id}`}>
-          <button className="btn">Detail</button>
+          <button className="btn btn-success" style={{borderRadius:"30px"}}>Detail</button>
         </Link>
       </div>
     </div>

@@ -22,6 +22,6 @@ router
   .route('/:id')
   .delete(protect, admin, deleteUser)
   .get(getUserById)
-  .put(protect, admin, updateUser)
+  .put(protect, updateUser)
 
 export default router

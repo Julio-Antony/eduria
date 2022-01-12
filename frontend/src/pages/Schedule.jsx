@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import Schedules from "../components/class-schedules/Schedules.jsx";
+import StudentSchedule from "../components/class-schedules/StudentSchedule.jsx"
 import FormAdd from "../components/form-edit-schedule/FormAdd.jsx";
 import TableSchedule from "../components/table/TableSchedule.jsx";
 import { getToken } from "../config/Api";
@@ -76,6 +77,9 @@ const Schedule = () => {
           </div>
           <TableSchedule schedule={scheduleList} />
         </>
+      )}
+      {localStorage.getItem("level") === "siswa" && (
+        <StudentSchedule/>
       )}
     </div>
   );

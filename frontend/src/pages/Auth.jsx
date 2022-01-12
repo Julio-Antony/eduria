@@ -55,6 +55,7 @@ const Auth = () => {
           localStorage.setItem("username", allData[0].data.nama);
           localStorage.setItem("foto", allData[0].data.foto);
           localStorage.setItem("kelas", allData[0].data.kelas);
+          localStorage.setItem("email", allData[0].data.email);
           setUserlevel(allData[0].data.level);
           const toActivity = {
             nama_pengguna: allData[0].data.nama,

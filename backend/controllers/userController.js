@@ -13,7 +13,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   if (user || bcrypt.compareSync(password, user.passwordHash)) {
     res.json({
-      _id: user._id,
+      email:user.email,
       nama: user.nama,
       level: user.level,
       kelas: user.kelas || "",
@@ -109,8 +109,24 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   GET /api/users
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({})
-  res.json(users)
+  const pageSize = Number(req.query.limit) || 10
+    const page = Number(req.query.pageNumber) || 1
+
+    const keyword = req.query.keyword
+        ? {
+            email: {
+                $regex: req.query.keyword,
+                $options: 'i',
+            },
+        }
+        : {}
+
+    const count = await User.countDocuments({ ...keyword })
+    const users = await User.find({ ...keyword })
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))
+
+    res.json({ users, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Delete user

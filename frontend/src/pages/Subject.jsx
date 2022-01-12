@@ -91,7 +91,7 @@ const Subject = () => {
           <SubjectPanel display={displayMapel} mapel={mapel} />
         </div>
         <div className="col-md-4">
-          <FormSubject teacher={teacher} />
+          <FormSubject teacher={teacher} refresh={data}/>
         </div>
       </div>
     </div>

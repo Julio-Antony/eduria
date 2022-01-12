@@ -16,13 +16,13 @@ const StudentSchedule = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        setDataTable(res.data);
+        console.log(res.data.jadwal);
+        setDataTable(res.data.jadwal);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [token]);
   return (
     <div className="card full-height">
       <div className="row">
@@ -43,56 +43,36 @@ const StudentSchedule = () => {
           </thead>
           <tbody>
             <tr>
-              <td>
-                {dataTable
-                  .filter((data) => data.hari === "senin")
-                  .map((item, index) => (
-                    <div key={index}>
-                      <p className="text-schedule">{item.waktu}</p>
-                      <p>{item.mapel}</p>
-                    </div>
-                  ))}
-              </td>
-              <td>
-                {dataTable
-                  .filter((data) => data.hari === "selasa")
-                  .map((item, index) => (
-                    <div key={index}>
-                      <p className="text-schedule">{item.waktu}</p>
-                      <p>{item.mapel}</p>
-                    </div>
-                  ))}
-              </td>
-              <td>
-                {dataTable
-                  .filter((data) => data.hari === "rabu")
-                  .map((item, index) => (
-                    <div key={index}>
-                      <p className="text-schedule">{item.waktu}</p>
-                      <p>{item.mapel}</p>
-                    </div>
-                  ))}
-              </td>
-              <td>
-                {dataTable
-                  .filter((data) => data.hari === "kamis")
-                  .map((item, index) => (
-                    <div key={index}>
-                      <p className="text-schedule">{item.waktu}</p>
-                      <p>{item.mapel}</p>
-                    </div>
-                  ))}
-              </td>
-              <td>
-                {dataTable
-                  .filter((data) => data.hari === "jum'at")
-                  .map((item, index) => (
-                    <div key={index}>
-                      <p className="text-schedule">{item.waktu}</p>
-                      <p>{item.mapel}</p>
-                    </div>
-                  ))}
-              </td>
+            {dataTable.filter((data) => data.waktu === "07:00 - 08:20").map((item, index) => (
+                <td key={index}>
+                  <p className="text-schedule">{item.waktu}</p>
+                  <p>{item.mapel}</p>
+                </td>
+            ))}
+            </tr>
+            <tr>
+            {dataTable.filter((data) => data.waktu === "08:20 - 10:10").map((item, index) => (
+                <td key={index}>
+                  <p className="text-schedule">{item.waktu}</p>
+                  <p>{item.mapel}</p>
+                </td>
+            ))}
+            </tr>
+            <tr>
+            {dataTable.filter((data) => data.waktu === "10:10 - 11:30").map((item, index) => (
+                <td key={index}>
+                  <p className="text-schedule">{item.waktu}</p>
+                  <p>{item.mapel}</p>
+                </td>
+            ))}
+            </tr>
+            <tr>
+            {dataTable.filter((data) => data.waktu === "11:30 - 12:50").map((item, index) => (
+                <td key={index}>
+                  <p className="text-schedule">{item.waktu}</p>
+                  <p>{item.mapel}</p>
+                </td>
+            ))}
             </tr>
           </tbody>
         </table>
