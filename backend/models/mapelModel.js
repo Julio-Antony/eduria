@@ -34,6 +34,7 @@ const mapel = mongoose.Schema({
         type: String,
         required: true
     },
+    id_guru:String,
     cover: String,
     materi: [materiSchema],
     penyunting: String

@@ -13,6 +13,7 @@ const FormSubject = (props) => {
   const [teacher, setTeacher] = useState("");
   const [tempImage, setTempImage] = useState(null);
   const [files, setFiles] = useState("");
+  const [idGuru, setIdGuru] = useState("")
   // const [error, setError] = useState("");
   const {
     register,
@@ -43,11 +44,14 @@ const FormSubject = (props) => {
   }
 
   function onFileSubmit() {
-    console.log(mapel);
+    setTempImage(null)
+    setMapel("")
+    setTeacher("")
     const data = JSON.stringify({
       cover: files,
       nama_mapel: mapel,
       nama_guru: teacher,
+      id_guru: idGuru,
     });
     axios
       .post("/api/subject", data, {
@@ -57,6 +61,7 @@ const FormSubject = (props) => {
         },
       })
       .then((res) => {
+        props.refresh()
         const toActivity = {
           nama_pengguna: localStorage.getItem("username"),
           nama_aktivitas: "Menambah mata pelajaran",
@@ -83,6 +88,12 @@ const FormSubject = (props) => {
       });
   }
 
+  const changeTeacher = (e) => {
+    setTeacher(e.value);
+    const getId = props.teacher.find((data) => data.nama === e.value);
+    setIdGuru(getId._id);
+  };
+
   let guruOptions = props.teacher.map(function (kelas) {
     return { value: kelas.nama, label: kelas.nama };
   });
@@ -107,7 +118,7 @@ const FormSubject = (props) => {
             />
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Nama guru</label>
+            <label htmlFor="exampleInputPassword1">Nama guru</label>
             <Select
               closeMenuOnSelect={true}
               className="mt-1 mb-1"
@@ -116,9 +127,10 @@ const FormSubject = (props) => {
               maxMenuHeight={135}
               isSingle
               options={guruOptions}
-              onChange={(e) => setTeacher(e.value)}
+              onChange={changeTeacher}
             />
           </div>
+          <label htmlFor="exampleInputPassword1">Sampul</label>
           <div className="cover-area d-flex mb-3">
             {tempImage === null ? (
               <div className="mx-auto my-auto">
@@ -126,7 +138,7 @@ const FormSubject = (props) => {
                   <div className="form-group mx-sm-3 mb-2 mt-3">
                     <label htmlFor="file-upload" className="custom-file-upload">
                       <FontAwesomeIcon icon={faFileUpload} className="mr-2" />
-                      Pilih cover
+                      Pilih sampul
                     </label>
                     <input
                       id="file-upload"
@@ -147,7 +159,7 @@ const FormSubject = (props) => {
                         htmlFor="file-upload"
                         className="custom-file-upload"
                       >
-                        Ganti Foto
+                        Ganti sampul
                       </label>
                       <input
                         id="file-upload"
@@ -162,9 +174,11 @@ const FormSubject = (props) => {
               </div>
             )}
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          <div className="text-center">
+            <button type="submit" className="btn btn-success" style={{ borderRadius: "30px" }}>
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>

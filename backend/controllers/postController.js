@@ -5,7 +5,7 @@ import Post from '../models/postModel.js'
 // @route   GET /api/posts
 // @access  Public
 const getPosts = asyncHandler(async (req, res) => {
-    const pageSize = 10
+    const pageSize = Number(req.query.limit) || 10
     const page = Number(req.query.pageNumber) || 1
 
     const keyword = req.query.keyword

@@ -68,7 +68,7 @@ const Dropdown = (props) => {
               props.renderItems(item, index)
             )
           : ""} */}
-        <Link to="/profile">
+        <Link to={`/user_detail/${props.id}`}>
           <div className="notification-item">
             <i className="bx bx-user"></i>
             <span>Profil</span>

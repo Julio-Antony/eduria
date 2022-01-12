@@ -49,6 +49,7 @@ const createSubject = asyncHandler(async (req, res) => {
     const subject = new Mapel({
         nama_mapel: req.body.nama_mapel,
         nama_guru: req.body.nama_guru,
+        id_guru:req.body.id_guru,
         cover: req.body.cover,
         user: req.user._id,
     })

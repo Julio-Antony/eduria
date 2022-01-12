@@ -9,6 +9,8 @@ import Dropdown from "../dropdown/Dropdown";
 import ThemeMenu from "../thememenu/ThemeMenu";
 
 import notifications from "../../assets/JsonData/notification.json";
+import axios from "axios";
+import { getToken } from "../../config/Api";
 
 const renderNotificationItem = (item, index) => (
   <div className="notification-item" key={index}>
@@ -30,12 +32,26 @@ const Topnav = () => {
   const [nama, setNama] = useState("");
   const [image, setImage] = useState("");
   const [judul, setJudul] = useState("");
+  const [id, setId] = useState("");
+
+  const token = getToken()
 
   useEffect(() => {
+    axios.get(`/api/users?keyword=${localStorage.getItem("email")}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      setId(res.data.users[0]._id)
+    }).catch((err) => {
+      console.log(err)
+    })
     setNama(localStorage.getItem("username"));
     setImage(localStorage.getItem("foto"));
     setJudul(localStorage.getItem("page"));
-  }, []);
+
+  }, [token]);
 
   const curr_user = {
     display_name: nama,
@@ -52,9 +68,10 @@ const Topnav = () => {
         <div className="topnav__right-item">
           {/* dropdown here */}
           <Dropdown
+          id={id}
             customToggle={() => renderUserToggle(curr_user)}
-            // contentData={user_menu}
-            // renderItems={(item, index) => renderUserMenu(item, index)}
+          // contentData={user_menu}
+          // renderItems={(item, index) => renderUserMenu(item, index)}
           />
         </div>
         <div className="topnav__right-item">
