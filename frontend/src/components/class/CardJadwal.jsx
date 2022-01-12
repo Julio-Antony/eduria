@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getToken } from "../../config/Api";
+import { humanize } from "../../config/Function";
 
 const CardJadwal = (props) => {
   const [teacher, setTeacher] = useState({});
@@ -44,7 +45,7 @@ const CardJadwal = (props) => {
     <div className="card-jadwal m-auto">
       <div className="card-jadwal-header">
         <div className="card-jadwal-overlay"></div>
-        <div className="row">
+        <div className="row p-1">
           <div className="col-md-3">
             <div className="img-wrapper-teacher">
               <img
@@ -56,7 +57,10 @@ const CardJadwal = (props) => {
           </div>
           <div className="col-md-9">
             <small className="text-light">{teacher.nama}</small>
-            <small className="text-light">{teacher.nama}</small>
+            <br />
+            <small className="text-light">
+              {humanize(props.jadwal.hari)}, {props.jadwal.waktu}
+            </small>
           </div>
         </div>
         <img

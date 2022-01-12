@@ -59,20 +59,24 @@ const Schedule = () => {
 
   return (
     <div>
-      <div className="row">
-        <div className="col-md-4">
-          <FormAdd
-            class={classList}
-            subject={subjectList}
-            teacher={teacherList}
-            refresh={getData}
-          />
-        </div>
-        <div className="col-md-8">
-          <Schedules class={classList} />
-        </div>
-      </div>
-      <TableSchedule schedule={scheduleList} />
+      {localStorage.getItem("level") === "admin" && (
+        <>
+          <div className="row">
+            <div className="col-md-4">
+              <FormAdd
+                class={classList}
+                subject={subjectList}
+                teacher={teacherList}
+                refresh={getData}
+              />
+            </div>
+            <div className="col-md-8">
+              <Schedules class={classList} />
+            </div>
+          </div>
+          <TableSchedule schedule={scheduleList} />
+        </>
+      )}
     </div>
   );
 };

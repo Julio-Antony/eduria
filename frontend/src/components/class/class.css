@@ -70,6 +70,13 @@
   width: 100%;
 }
 
+.user-image-wrapper:hover {
+  transform: scale(1.2);
+  border: 5px solid #237a57;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
 .card-jadwal {
   height: 327.5px;
   width: 204px;
@@ -95,20 +102,19 @@
 }
 
 .card-jadwal-header .row {
-  position: absolute;
-  z-index: 2;
   margin-top: 90px;
-  margin-left: 2px;
 }
 
 .card-jadwal-header .bg-img {
-  width: 100%;
+  margin-top: -145px;
+  width: 204px;
   border-radius: 15px 15px 0px 0px;
 }
 
 .jadwal-title {
   color: #237a57;
   min-height: 100px;
+  padding-top: 30px;
 }
 
 .card-jadwal-body button {

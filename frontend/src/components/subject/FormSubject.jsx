@@ -88,7 +88,7 @@ const FormSubject = (props) => {
   });
 
   return (
-    <div className="card full-height">
+    <div className="card">
       <div className="card__header">
         <h5 className="mb-5">Buat Mata Pelajaran</h5>
         <form onSubmit={handleSubmit(onFileSubmit)}>
