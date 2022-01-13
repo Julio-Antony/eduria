@@ -11,6 +11,7 @@ const FormAdd = (props) => {
   const [hari, setHari] = useState("");
   const [waktu, setWaktu] = useState("");
   const [mapel, setMapel] = useState("");
+  const [idMapel, setIdMapel] = useState("")
   const [submit, setSubmit] = useState(false);
   const {
     register,
@@ -57,6 +58,7 @@ const FormAdd = (props) => {
       hari: hari,
       waktu: waktu,
       mapel: mapel,
+      id_mapel: idMapel
     };
 
     axios
@@ -81,6 +83,12 @@ const FormAdd = (props) => {
           });
         }
       });
+  };
+
+  const changeMapel = (e) => {
+    setMapel(e.value);
+    const getId = props.subject.find((data) => data.nama_mapel === e.value);
+    setIdMapel(getId._id);
   };
 
   return (
@@ -138,7 +146,7 @@ const FormAdd = (props) => {
             maxMenuHeight={135}
             isSingle
             options={subjectOptions}
-            onChange={(e) => setMapel(e.value)}
+            onChange={changeMapel}
           />
         </div>
         <button type="submit" className="btn btn-success">

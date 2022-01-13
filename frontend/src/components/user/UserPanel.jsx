@@ -2,22 +2,18 @@ import React from "react";
 
 const UserPanel = (props) => {
   return (
-    <div>
-      <div className="card full-height">
-        <div className="card__header">
-          <h5 className="mb-3">Daftar Pengguna</h5>
-          <div className="row">
-            {props.user ? (
-              _renderCard(props.user, props.display)
-            ) : (
-              <div className="col">
-                <p>Loading...</p>
-              </div>
-            )}
-          </div>
+      <div className="card__header">
+        <h5 className="mb-3">Daftar Pengguna</h5>
+        <div className="row">
+          {props.user ? (
+            _renderCard(props.user, props.display)
+          ) : (
+            <div className="col">
+              <p>Loading...</p>
+            </div>
+          )}
         </div>
       </div>
-    </div>
   );
 };
 

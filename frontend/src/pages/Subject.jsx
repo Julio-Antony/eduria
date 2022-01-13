@@ -72,7 +72,6 @@ const Subject = () => {
     });
   };
 
-  const perPage = 10;
   const displayMapel = mapel.map((item, index) => {
     return (
       <CardMapel
@@ -84,6 +83,8 @@ const Subject = () => {
       />
     );
   });
+
+  console.log(mapel)
   return (
     <div>
       <div className="row">

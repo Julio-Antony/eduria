@@ -1,6 +1,7 @@
 import React from "react";
 
 const SubjectPanel = (props) => {
+  console.log(props)
   return (
     <div className="card full-height">
       <div className="card__header">
