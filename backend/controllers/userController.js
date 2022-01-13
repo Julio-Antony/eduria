@@ -2,6 +2,15 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 import bcrypt from 'bcryptjs'
+import fs from 'fs'
+import image from '../data/image.js'
+
+function base64_encode(file) {
+  // read binary data
+  var bitmap = fs.readFileSync(file);
+  // convert binary data to base64 encoded string
+  return new Buffer(bitmap).toString('base64');
+}
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -43,6 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     nama,
     email,
     password: bcrypt.hashSync(password, 10),
+    foto: image,
     level: "siswa",
     isVerified: true,
   })
@@ -126,7 +136,7 @@ const getUsers = asyncHandler(async (req, res) => {
         .limit(pageSize)
         .skip(pageSize * (page - 1))
 
-    res.json({ users, page, pages: Math.ceil(count / pageSize) })
+    res.json({ users, count, page, pages: Math.ceil(count / pageSize) })
 })
 
 // @desc    Delete user

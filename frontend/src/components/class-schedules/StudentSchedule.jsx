@@ -6,23 +6,25 @@ const StudentSchedule = () => {
   const [dataTable, setDataTable] = useState([]);
 
   const token = getToken();
+  const getKelas = localStorage.getItem("kelas")
 
   useEffect(() => {
     axios
-      .get(`/api/schedule/${localStorage.getItem("kelas")}`, {
+      .get(`/api/schedule/${getKelas}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        console.log(res.data.jadwal);
-        setDataTable(res.data.jadwal);
+        console.log(res.data);
+        setDataTable(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [token]);
+  }, [token, getKelas]);
+
   return (
     <div className="card full-height">
       <div className="row">
@@ -30,7 +32,7 @@ const StudentSchedule = () => {
           <h2 className="page-header">Jadwal Kelas</h2>
         </div>
       </div>
-      {dataTable.length > 0 ? (
+      {dataTable ? (
         <table>
           <thead>
             <tr className="ml-2">

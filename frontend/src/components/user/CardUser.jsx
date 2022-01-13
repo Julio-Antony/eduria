@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Dropdown from "./Dropdown";
 
 const CardUser = (props) => {
-  console.log(props);
   const renderToggle = () => (
     <FontAwesomeIcon icon={faEllipsisV} className="card-menu" />
   );
