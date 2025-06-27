@@ -13,6 +13,7 @@ import User from "../pages/User";
 import SubjectDetail from "../pages/SubjectDetail";
 import ClassDetail from "../pages/ClassDetail";
 import UserDetail from "../pages/UserDetail";
+import Category from "../pages/Category";
 
 const Routes = () => {
   return (
@@ -23,6 +24,7 @@ const Routes = () => {
       <Route path="/schedule" component={Schedule} />
       <Route path="/kelas" component={Class} />
       <Route path="/detail_kelas/:id" component={ClassDetail} />
+      <Route path="/kategori" component={Category} />
       <Route path="/mapel" component={Subject} />
       <Route path="/subject_detail/:id" component={SubjectDetail} />
       <Route path="/aktivitas" component={Log} />

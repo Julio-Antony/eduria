@@ -8,6 +8,10 @@
   box-shadow: var(--box-shadow);
 }
 
+.sidebar a {
+  text-decoration: none;
+}
+
 .sidebar__logo {
   height: 150px;
   display: flex;

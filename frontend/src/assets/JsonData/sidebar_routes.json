@@ -15,6 +15,11 @@
         "icon": "bx bx-chalkboard"
     },
     {
+        "display_name": "Kategori Mapel",
+        "route": "/kategori",
+        "icon": "bx bx-grid-alt"
+    },
+    {
         "display_name": "Mata Pelajaran",
         "route": "/mapel",
         "icon": "bx bx-book-bookmark"

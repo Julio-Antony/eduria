@@ -30,7 +30,7 @@ const Dropdown = (props) => {
 
   return (
     <>
-      <div className="dropdown" style={{ position: "absolute" }}>
+      <div className="dropdown" style={{ position: "absolute", zIndex: 2 }}>
         <button ref={dropdown_toggle_el} className="dropdown__toggle">
           {props.icon ? <i className={props.icon}></i> : ""}
           {props.badge ? (

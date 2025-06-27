@@ -45,6 +45,10 @@
     transition: transform 0.3s ease 0s;
 }
 
+.dropdown__content a {
+    text-decoration: none;
+}
+
 .dropdown__content.active {
     transform: scale(1);
     transition: transform 0.5s var(--transition-cubic);

@@ -32,7 +32,7 @@ const Dropdown = (props) => {
     <>
       <div
         className="dropdown"
-        style={{ position: "absolute", marginLeft: "185px" }}
+        style={{ position: "absolute", width: "100%"}}
       >
         <button ref={dropdown_toggle_el} className="dropdown__toggle">
           {props.icon ? <i className={props.icon}></i> : ""}

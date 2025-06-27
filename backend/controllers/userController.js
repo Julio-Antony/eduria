@@ -139,6 +139,30 @@ const getUsers = asyncHandler(async (req, res) => {
     res.json({ users, count, page, pages: Math.ceil(count / pageSize) })
 })
 
+// @desc    Get all teachers
+// @route   GET /api/teachers
+// @access  Private/Admin
+const getTeachers = asyncHandler(async (req, res) => {
+  const pageSize = Number(req.query.limit) || 10
+    const page = Number(req.query.pageNumber) || 1
+
+    const keyword = req.query.keyword
+        ? {
+            email: {
+                $regex: req.query.keyword,
+                $options: 'i',
+            },
+        }
+        : {}
+
+    const count = await User.countDocuments({ ...keyword, level: 'guru' })
+    const teachers = await User.find({ ...keyword, level: 'guru' })
+        // .limit(pageSize)
+        // .skip(pageSize * (page - 1))
+
+    res.json({ teachers, count, page, pages: Math.ceil(count / pageSize) })
+})
+
 // @desc    Delete user
 // @route   DELETE /api/users/:id
 // @access  Private/Admin
@@ -208,6 +232,7 @@ export {
   getUserProfile,
   updateUserProfile,
   getUsers,
+  getTeachers,
   deleteUser,
   getUserById,
   updateUser,

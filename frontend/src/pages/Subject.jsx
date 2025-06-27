@@ -7,14 +7,18 @@ import CardMapel from "../components/subject/CardMapel";
 import FormSubject from "../components/subject/FormSubject";
 import { useCallback } from "react";
 import swal from "sweetalert";
+import { jwtDecode } from 'jwt-decode';
 
 const Subject = () => {
   const [mapel, setMapel] = useState([]);
   const [teacher, setTeacher] = useState([]);
   const token = getToken();
-
+  const role = localStorage.getItem('level')
+  const decoded = jwtDecode(localStorage.getItem('access_token'));
+  const myId = decoded.id
+  
   const data = useCallback(() => {
-    const guruUrl = "/api/users";
+    const guruUrl = "/api/users/teachers";
     const subjectUrl = "/api/subject";
 
     const guru = axios.get(guruUrl, {
@@ -24,14 +28,14 @@ const Subject = () => {
     const subject = axios.get(subjectUrl, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     axios
-      .all([guru, subject])
-      .then(
-        axios.spread((...allData) => {
-          console.log(allData[1].data.subject);
-          setTeacher(allData[0].data.filter((data) => data.level === "guru"));
-          setMapel(allData[1].data.subject);
+    .all([guru, subject])
+    .then(
+      axios.spread((...allData) => {
+          console.log(allData[1].data.subject)
+          console.log(myId)
+          setTeacher(allData[0].data.teachers)
+          setMapel(role === 'guru' ? allData[1].data.subject.filter((mySubjects) => mySubjects.id_guru === myId ) : allData[1].data.subject);
         })
       )
       .catch((err) => {
@@ -40,7 +44,7 @@ const Subject = () => {
   }, [token]);
 
   useEffect(() => {
-    localStorage.setItem("page", "Mata Kelas");
+    localStorage.setItem("page", "Mata Pelajaran");
     data();
   }, [data]);
 
@@ -84,7 +88,6 @@ const Subject = () => {
     );
   });
 
-  console.log(mapel)
   return (
     <div>
       <div className="row">

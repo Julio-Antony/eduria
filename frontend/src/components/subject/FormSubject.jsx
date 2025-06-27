@@ -7,13 +7,17 @@ import { useForm } from "react-hook-form";
 import Select, { components } from "react-select";
 import swal from "sweetalert";
 import { getToken } from "../../config/Api";
+import { jwtDecode } from 'jwt-decode';
 
 const FormSubject = (props) => {
   const [mapel, setMapel] = useState("");
-  const [teacher, setTeacher] = useState("");
+  const [teacher, setTeacher] = useState(null);
   const [tempImage, setTempImage] = useState(null);
   const [files, setFiles] = useState("");
   const [idGuru, setIdGuru] = useState("")
+  const role = localStorage.getItem('level')
+  const decoded = jwtDecode(localStorage.getItem('access_token'));
+  const myId = decoded.id
   // const [error, setError] = useState("");
   const {
     register,
@@ -95,8 +99,11 @@ const FormSubject = (props) => {
   };
 
   let guruOptions = props.teacher.map(function (kelas) {
-    return { value: kelas.nama, label: kelas.nama };
+    return { id: kelas._id, value: kelas.nama, label: kelas.nama };
   });
+
+  console.log(guruOptions)
+  console.log(guruOptions.find((list) => list.id === myId))
 
   return (
     <div className="card">
@@ -125,7 +132,9 @@ const FormSubject = (props) => {
               components={{ Placeholder }}
               placeholder={"Guru"}
               maxMenuHeight={135}
+              value={role === 'guru' ? guruOptions.find((list) => list.id === myId) : teacher}
               isSingle
+              isDisabled={role === 'guru'}
               options={guruOptions}
               onChange={changeTeacher}
             />

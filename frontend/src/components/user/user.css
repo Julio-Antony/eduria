@@ -5,6 +5,7 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin-left: 16px;
   margin-bottom: 16px;
+  position: relative;
 }
 
 .card-mapel-body {

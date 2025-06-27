@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals'
 
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 
 import { Provider } from 'react-redux'
 
@@ -15,9 +15,13 @@ import './assets/css/theme.css'
 import './assets/css/index.css'
 
 import Layout from './components/layout/Layout'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
+const middleware = [thunk];
 const store = createStore(
-  rootReducer
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
 )
 
 document.title = 'Eduria'

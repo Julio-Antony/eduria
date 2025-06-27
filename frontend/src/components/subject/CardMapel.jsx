@@ -10,7 +10,6 @@ const CardMapel = (props) => {
   );
   return (
     <div className="card-mapel">
-      <div className="card-mapel-header">
         <Dropdown
           customToggle={() => renderToggle()}
           refresh={props.refresh}
@@ -19,6 +18,7 @@ const CardMapel = (props) => {
           data={props.mapel}
           teacher={props.teacher}
         />
+      <div className="card-mapel-header">
         <img
           src={"data:image/png;base64," + props.mapel.cover}
           alt="gambar sampul"
