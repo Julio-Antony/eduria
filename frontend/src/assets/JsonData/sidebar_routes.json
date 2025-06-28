@@ -10,6 +10,11 @@
         "icon": "bx bx-home"
     },
     {
+        "display_name": "Kursus",
+        "route": "/course",
+        "icon": "bx bx-book"
+    },
+    {
         "display_name": "Kelas",
         "route": "/kelas",
         "icon": "bx bx-chalkboard"

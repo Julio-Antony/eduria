@@ -14,6 +14,8 @@ import SubjectDetail from "../pages/SubjectDetail";
 import ClassDetail from "../pages/ClassDetail";
 import UserDetail from "../pages/UserDetail";
 import Category from "../pages/Category";
+import Course from "../pages/Course";
+import CourseDetail from "../pages/CourseDetail";
 
 const Routes = () => {
   return (
@@ -22,6 +24,8 @@ const Routes = () => {
       <Route path="/beranda" component={Home} />
       <Route path="/customers" component={Customers} />
       <Route path="/schedule" component={Schedule} />
+      <Route path="/course" component={Course} />
+      <Route path="/course_detail/:id" component={CourseDetail} />
       <Route path="/kelas" component={Class} />
       <Route path="/detail_kelas/:id" component={ClassDetail} />
       <Route path="/kategori" component={Category} />

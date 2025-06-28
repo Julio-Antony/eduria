@@ -39,4 +39,13 @@ const admin = (req, res, next) => {
   }
 }
 
+export const teacher = (req, res, next) => {
+  if (req.user && req.user.level === 'guru') {
+    next()
+  } else {
+    res.status(401)
+    throw new Error('Not authorized as teacher')
+  }
+}
+
 export { protect, admin }
