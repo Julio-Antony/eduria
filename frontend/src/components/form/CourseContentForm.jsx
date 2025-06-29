@@ -9,7 +9,18 @@ const CourseContentForm = ({ contents, setContents }) => {
 
   const handleModuleChange = (sIdx, mIdx, field, value) => {
     const updated = [...contents]
-    updated[sIdx].modules[mIdx][field] = value
+
+    const updatedModules = [...updated[sIdx].modules]
+    const updatedModule = { ...updatedModules[mIdx], [field]: value }
+    updatedModules[mIdx] = updatedModule
+
+    updated[sIdx] = {
+      ...updated[sIdx],
+      modules: updatedModules,
+    }
+
+    console.log(updated)
+
     setContents(updated)
   }
 
@@ -30,7 +41,7 @@ const CourseContentForm = ({ contents, setContents }) => {
     updated[sIdx].modules.push({
       type: '',
       title: '',
-      url: '',
+      content: '',
       file: null,
       questions: [],
     })
@@ -104,28 +115,58 @@ const CourseContentForm = ({ contents, setContents }) => {
                   onChange={(e) => handleModuleChange(sIdx, mIdx, 'title', e.target.value)}
                 />
 
-                {mod.type === 'video' || mod.type === 'link' ? (
+                {(mod.type === 'video' || mod.type === 'link') && (
                   <input
                     className="form-control mb-2"
                     placeholder="URL"
-                    value={mod.url}
-                    onChange={(e) => handleModuleChange(sIdx, mIdx, 'url', e.target.value)}
+                    value={mod.content || ''}
+                    onChange={(e) => handleModuleChange(sIdx, mIdx, 'content', e.target.value)}
                   />
-                ) : null}
+                )}
 
-                {mod.type === 'file' ? (
-                  <input
-                    type="file"
-                    className="form-control mb-2"
-                    onChange={(e) => handleModuleChange(sIdx, mIdx, 'file', e.target.files[0])}
-                  />
-                ) : null}
+                {mod.type === 'file' && (
+                  <div className="mb-2">
+                    {/* Tampilkan link jika file sudah diupload (content berupa string URL) */}
+                    {typeof mod.content === 'string' && mod.content && (
+                      <div className="mb-2">
+                        <label className="form-label">File Saat Ini</label><br />
+                        <a
+                          href={mod.content}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary"
+                        >
+                          {mod.content.split('/').pop()}
+                        </a>
+                      </div>
+                    )}
+
+                    {/* Jika sedang menginput file baru, tampilkan namanya sebelum submit */}
+                    {mod.content instanceof File && (
+                      <div className="mb-2">
+                        <label className="form-label">File Baru</label><br />
+                        <span className="text-secondary">{mod.content.name}</span>
+                      </div>
+                    )}
+
+                    {/* Input File */}
+                    <label className="form-label">Upload File</label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      onChange={(e) =>
+                        handleModuleChange(sIdx, mIdx, 'file', e.target.files[0])
+                      }
+                    />
+                  </div>
+                )}
+
 
                 {mod.type === 'text' ? (
                   <textarea
                     className="form-control mb-2"
                     placeholder="Konten teks"
-                    onChange={(e) => handleModuleChange(sIdx, mIdx, 'text', e.target.value)}
+                    onChange={(e) => handleModuleChange(sIdx, mIdx, 'content', e.target.value)}
                   />
                 ) : null}
 

@@ -87,7 +87,7 @@ const Course = () => {
             price: course.price,
             category: course.category?._id || '',
             teacher: course.teacher?._id || '',
-            visibility: course.visibility,
+            visibility: course.visible,
             thumbnail: course.thumbnail,
         })
         setCourseContent(course.sections || [])
@@ -136,10 +136,39 @@ const Course = () => {
             return Swal('Gagal', 'Nama lengkap dan shortname wajib diisi', 'error')
         }
 
+        console.log({'course content' : courseContent})
+
+        const transformedSections = courseContent.map((section) => ({
+            ...section,
+            modules: section.modules.map((mod) => {
+                let content = ''
+
+                if (mod.type === 'video' || mod.type === 'link') {
+                    content = mod.content || ''
+                } else if (mod.type === 'text') {
+                    content = mod.content || ''
+                } else if (mod.type === 'file' && mod.file) {
+                    content = mod.file // akan diganti oleh backend saat upload file
+                }
+
+                return {
+                    ...mod,
+                    content,
+                    url: undefined,
+                    text: undefined,
+                    file: undefined,
+                }
+            }),
+        }))
+
+        console.log(transformedSections)
+
         const fullData = {
             ...formData,
             sections: courseContent,
         }
+
+        console.log(fullData)
 
         try {
             if (editMode) {

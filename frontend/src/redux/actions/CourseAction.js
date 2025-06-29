@@ -9,6 +9,34 @@ const config = {
   },
 }
 
+const buildCourseFormData = (data) => {
+  const formData = new FormData()
+
+  formData.append('fullname', data.fullname)
+  formData.append('shortname', data.shortname)
+  formData.append('description', data.description || '')
+  formData.append('summary', data.summary || '')
+  formData.append('price', data.price || 0)
+  formData.append('category', data.category)
+  formData.append('teacher', data.teacher)
+  formData.append('visible', data.visibility ? 'true' : 'false')
+  formData.append('thumbnail', data.thumbnail || '')
+
+  // Tambah sections
+  formData.append('sections', JSON.stringify(data.sections))
+
+  // Upload file jika ada
+  data.sections?.forEach((section, sIdx) => {
+    section.modules?.forEach((mod, mIdx) => {
+      if (mod.type === 'file' && mod.file instanceof File) {
+        formData.append(`modulFile_${sIdx}_${mIdx}`, mod.file)
+      }
+    })
+  })
+
+  return formData
+}
+
 // Get all courses
 export const getAllCourses = () => async (dispatch) => {
   try {
@@ -43,14 +71,22 @@ export const getCourseById = (id) => async (dispatch) => {
   }
 }
 
-// Create course
+// CREATE COURSE
 export const createCourse = (courseData) => async (dispatch) => {
   try {
     dispatch({ type: 'COURSE_CREATE_REQUEST' })
 
-    const { data } = await axios.post('/api/courses', courseData, config)
+    const token = localStorage.getItem('access_token')
+    const formData = buildCourseFormData(courseData)
 
-    swal('Berhasil', 'Kursus berhasil dibuat', 'success')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const { data } = await axios.post('/api/courses', formData, config)
+
     dispatch({ type: 'COURSE_CREATE_SUCCESS', payload: data })
   } catch (error) {
     swal('Gagal', error.response?.data?.message || error.message, 'error')
@@ -61,14 +97,23 @@ export const createCourse = (courseData) => async (dispatch) => {
   }
 }
 
+
 // Update course
 export const updateCourse = (id, courseData) => async (dispatch) => {
   try {
     dispatch({ type: 'COURSE_UPDATE_REQUEST' })
 
-    const { data } = await axios.put(`/api/courses/${id}`, courseData, config)
+    const token = localStorage.getItem('access_token')
+    const formData = buildCourseFormData(courseData)
 
-    swal('Berhasil', 'Kursus berhasil diperbarui', 'success')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const { data } = await axios.put(`/api/courses/${id}`, formData, config)
+
     dispatch({ type: 'COURSE_UPDATE_SUCCESS', payload: data })
   } catch (error) {
     swal('Gagal', error.response?.data?.message || error.message, 'error')

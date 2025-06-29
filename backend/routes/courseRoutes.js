@@ -1,4 +1,5 @@
 import express from 'express'
+import { upload } from '../middleware/uploadMiddleware.js'
 const router = express.Router()
 import {
   createCourse,
@@ -14,13 +15,13 @@ import { protect, admin, teacher } from '../middleware/authMiddleware.js'
 router.route('/').get(getCourses)
 
 // Create new course (admin atau pengajar)
-router.route('/').post(protect, createCourse)
+router.route('/').post(protect, upload.any(), createCourse)
 
 // Get, update, and delete course by ID
 router
   .route('/:id')
   .get(getCourseById)
-  .put(protect, updateCourse)
+  .put(protect, upload.any(), updateCourse)
   .delete(protect, admin, deleteCourse)
 
 export default router
