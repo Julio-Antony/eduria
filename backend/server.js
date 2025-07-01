@@ -17,6 +17,8 @@ import mapelRoutes from './routes/mapelRoutes.js'
 import activityRoutes from './routes/activityRoutes.js'
 import categoryRoutes from './routes/kategoriRoutes.js'
 import courseRoutes from './routes/courseRoutes.js'
+import paymentRoutes from './routes/paymentRoutes.js'
+import enrollmentRoutes from './routes/enrollmentRoutes.js'
 
 dotenv.config()
 
@@ -47,6 +49,8 @@ app.use('/api/subject', mapelRoutes)
 app.use('/api/activity', activityRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/courses', courseRoutes)
+app.use('/api/payments', paymentRoutes)
+app.use('/api/enrollments', enrollmentRoutes)
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))

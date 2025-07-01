@@ -136,7 +136,7 @@ const Course = () => {
             return Swal('Gagal', 'Nama lengkap dan shortname wajib diisi', 'error')
         }
 
-        console.log({'course content' : courseContent})
+        console.log({ 'course content': courseContent })
 
         const transformedSections = courseContent.map((section) => ({
             ...section,
@@ -210,9 +210,11 @@ const Course = () => {
         <div className="container mt-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h3>Katalog Kursus</h3>
-                <button className="btn btn-success" onClick={() => setShowModal(true)}>
-                    Tambah Kursus
-                </button>
+                {(userInfo === 'admin' || userInfo === 'guru') && (
+                    <button className="btn btn-success" onClick={() => setShowModal(true)}>
+                        Tambah Kursus
+                    </button>
+                )}
             </div>
 
             {/* FILTERS */}

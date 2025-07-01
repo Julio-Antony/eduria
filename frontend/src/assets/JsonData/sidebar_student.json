@@ -1,0 +1,27 @@
+[
+    {
+        "display_name": "Beranda",
+        "route": "/beranda",
+        "icon": "bx bx-home"
+    },
+    {
+        "display_name": "Kursus",
+        "route": "/course",
+        "icon": "bx bx-book"
+    },
+    {
+        "display_name": "Kurus Saya",
+        "route": "/my_course",
+        "icon": "bx bx-book-reader"
+    },
+    {
+        "display_name": "Jadwal Pelajaran",
+        "route": "/schedule",
+        "icon": "bx bx-time-five"
+    },
+    {
+        "display_name": "Penilaian",
+        "route": "/assessment",
+        "icon": "bx bx-user-check"
+    }
+]

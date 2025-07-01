@@ -8,6 +8,7 @@ import logo from "../../assets/images/logo.svg";
 
 import sidebar_items from "../../assets/JsonData/sidebar_routes.json";
 import sidebar_teacher from "../../assets/JsonData/sidebar_teacher.json";
+import sidebar_student from "../../assets/JsonData/sidebar_student.json";
 import { getLevel } from "../../config/Api";
 
 const SidebarItem = (props) => {
@@ -34,6 +35,10 @@ const Sidebar = (props) => {
     (item) => item.route === props.location.pathname
   );
 
+  const activeItem3 = sidebar_student.findIndex(
+    (item) => item.route === props.location.pathname
+  );
+
   return (
     <div className="sidebar">
       <div className="sidebar__logo">
@@ -50,7 +55,8 @@ const Sidebar = (props) => {
               />
             </Link>
           ))
-        : sidebar_teacher.map((item, index) => (
+        : level === "guru" ?
+        sidebar_teacher.map((item, index) => (
             <Link to={item.route} key={index}>
               <SidebarItem
                 title={item.display_name}
@@ -58,7 +64,17 @@ const Sidebar = (props) => {
                 active={index === activeItem2}
               />
             </Link>
-          ))}
+          ))
+        : sidebar_student.map((item, index) => (
+            <Link to={item.route} key={index}>
+              <SidebarItem
+                title={item.display_name}
+                icon={item.icon}
+                active={index === activeItem3}
+              />
+            </Link>
+          ))
+        }
     </div>
   );
 };
