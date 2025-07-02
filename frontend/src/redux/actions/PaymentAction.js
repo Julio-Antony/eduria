@@ -118,3 +118,22 @@ export const getCourseByOrderId = (orderId, token) => async (dispatch) => {
   }
 }
 
+export const getPaymentHistory = (token) => async (dispatch) => {
+  try {
+    dispatch({ type: 'PAYMENT_HISTORY_REQUEST' })
+
+    const { data } = await axios.get('/api/payments/history', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    dispatch({ type: 'PAYMENT_HISTORY_SUCCESS', payload: data })
+  } catch (error) {
+    dispatch({
+      type: 'PAYMENT_HISTORY_FAIL',
+      payload: error.response?.data?.message || error.message,
+    })
+  }
+}
+

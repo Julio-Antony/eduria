@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import Swal from 'sweetalert'
@@ -19,6 +19,7 @@ const getModuleIcon = (type) => {
 }
 
 const CourseDetail = () => {
+  const [openSections, setOpenSections] = useState({})
   const { id } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -28,6 +29,19 @@ const CourseDetail = () => {
   const { courses: enrolledCourses } = useSelector((state) => state.enrollment)
 
   const isEnrolled = enrolledCourses?.some((course) => course._id === courseDetail._id)
+  const userLevel = localStorage.getItem('level')
+
+  const canViewContent =
+    userLevel === 'admin' ||
+    userLevel === 'guru' ||
+    (userLevel === 'siswa' && isEnrolled)
+
+  const toggleSection = (index) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }))
+  }
 
   // Ambil course detail
   useEffect(() => {
@@ -153,23 +167,67 @@ const CourseDetail = () => {
         <h4>Konten Kursus</h4>
         {courseDetail.sections?.length > 0 ? (
           courseDetail.sections.map((section, i) => (
-            <div key={i} className="mb-4">
-              <h5>{i + 1}. {section.title}</h5>
-              <p>{section.description}</p>
-              <ul className="list-group">
-                {section.modules.map((mod, j) => (
-                  <li key={j} className="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{mod.title}</strong>
-                    {getModuleIcon(mod.type)}
-                  </li>
-                ))}
-              </ul>
+            <div key={i} className="mb-3">
+              <button
+                className="btn btn-outline-primary btn-block text-left"
+                onClick={() => toggleSection(i)}
+              >
+                {i + 1}. {section.title}
+              </button>
+
+              {openSections[i] && (
+                <div className="card card-body mt-2">
+                  <p>{section.description}</p>
+                  <ul className="list-group">
+                    {section.modules.map((mod, j) => (
+                      <li key={j} className="list-group-item">
+                        <div className="d-flex justify-content-between align-items-center">
+                          <strong>{mod.title}</strong>
+                          {getModuleIcon(mod.type)}
+                        </div>
+
+                        {canViewContent && (
+                          <div className="mt-2">
+                            <small className="text-muted">Konten:</small><br />
+                            {mod.type === 'link' && mod.content.includes('youtube.com') ? (
+                              <div className="embed-responsive embed-responsive-16by9">
+                                <iframe
+                                  className="embed-responsive-item"
+                                  src={mod.content.replace("watch?v=", "embed/")}
+                                  allowFullScreen
+                                  title="Video YouTube"
+                                ></iframe>
+                              </div>
+                            ) : mod.type === 'video' ? (
+                              <video src={mod.content} controls width="100%" />
+                            ) : mod.type === 'file' ? (
+                              <a href={mod.content} target="_blank" rel="noopener noreferrer">
+                                Unduh File
+                              </a>
+                            ) : (
+                              <div>{mod.content}</div>
+                            )}
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))
         ) : (
           <p>Belum ada konten.</p>
         )}
+
+        {!canViewContent && userLevel === 'siswa' && !isEnrolled && (
+          <div className="alert alert-warning mt-3">
+            Kamu harus membeli kursus untuk melihat isi modulnya.
+          </div>
+        )}
       </div>
+
+
     </div>
   )
 }

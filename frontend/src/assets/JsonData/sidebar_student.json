@@ -1,11 +1,6 @@
 [
     {
-        "display_name": "Beranda",
-        "route": "/beranda",
-        "icon": "bx bx-home"
-    },
-    {
-        "display_name": "Kursus",
+        "display_name": "Katalog Kursus",
         "route": "/course",
         "icon": "bx bx-book"
     },
@@ -15,13 +10,8 @@
         "icon": "bx bx-book-reader"
     },
     {
-        "display_name": "Jadwal Pelajaran",
-        "route": "/schedule",
-        "icon": "bx bx-time-five"
-    },
-    {
-        "display_name": "Penilaian",
-        "route": "/assessment",
-        "icon": "bx bx-user-check"
+        "display_name": "Riwayat Pembayaran",
+        "route": "/my_payments",
+        "icon": "bx bx-credit-card"
     }
 ]

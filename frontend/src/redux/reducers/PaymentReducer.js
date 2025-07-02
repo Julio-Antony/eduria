@@ -1,4 +1,5 @@
 const initialState = {
+  paymentHistory: [],
   result: null,     // hasil pembuatan pembayaran (snap token)
   status: null,     // status transaksi dari Midtrans
   loading: false,
@@ -49,6 +50,13 @@ export const paymentReducer = (state = initialState, action) => {
         loadingCourse: false,
         errorCourse: action.payload,
       }
+
+    case 'PAYMENT_HISTORY_REQUEST':
+      return { ...state, loading: true }
+    case 'PAYMENT_HISTORY_SUCCESS':
+      return { ...state, loading: false, paymentHistory: action.payload }
+    case 'PAYMENT_HISTORY_FAIL':
+      return { ...state, loading: false, error: action.payload }
 
     default:
       return state
