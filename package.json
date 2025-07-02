@@ -29,6 +29,7 @@
     "googleapis": "^92.0.0",
     "http-proxy-middleware": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
+    "lucide-react": "^0.525.0",
     "midtrans-client": "^1.4.3",
     "moment-timezone": "^0.5.34",
     "mongoose": "^5.10.6",
@@ -37,7 +38,7 @@
     "nodemon": "^2.0.15",
     "react-bootstrap": "^2.1.0",
     "react-data-table-component": "^7.4.6",
-    "react-doc-viewer": "^0.1.5",
+    "react-doc-viewer": "0.1.5",
     "react-modal": "^3.14.4",
     "react-select": "^5.2.1"
   },
