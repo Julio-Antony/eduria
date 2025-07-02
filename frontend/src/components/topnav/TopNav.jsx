@@ -62,7 +62,7 @@ const Topnav = () => {
       <div className="topnav__left">
         {/* <input type="text" placeholder="Cari disini..." />
         <i className="bx bx-search"></i> */}
-        <h2 className="page-header">{judul}</h2>
+        {/* <h2 className="page-header">{judul}</h2> */}
       </div>
       <div className="topnav__right">
         <div className="topnav__right-item">

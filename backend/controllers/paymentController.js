@@ -1,6 +1,7 @@
 import axios from 'axios'
 import asyncHandler from 'express-async-handler'
 import Payment from '../models/paymentModel.js'
+import User from '../models/userModel.js'
 
 // @desc    Create Snap payment token
 // @route   POST /api/payments/create
@@ -100,4 +101,34 @@ export const getCourseByOrderId = asyncHandler(async (req, res) => {
   }
 
   res.json(payment.course)
+})
+
+// @desc    Ambil riwayat pembayaran user
+// @route   GET /api/payments/history
+// @access  Private
+export const getPaymentHistory = asyncHandler(async (req, res) => {
+  // Cari user lengkap berdasarkan _id dari token
+  const user = await User.findById(req.user._id)
+
+  if (!user) {
+    res.status(404)
+    throw new Error('User tidak ditemukan')
+  }
+
+  let payments
+
+  if (user.level === 'admin') {
+    // Admin: semua pembayaran
+    payments = await Payment.find()
+      .populate('user', 'username email')
+      .populate('course', 'fullname')
+      .sort({ createdAt: -1 })
+  } else {
+    // Siswa/guru: hanya pembayaran milik sendiri
+    payments = await Payment.find({ user: req.user._id })
+      .populate('course', 'fullname')
+      .sort({ createdAt: -1 })
+  }
+
+  res.json(payments)
 })

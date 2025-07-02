@@ -80,7 +80,7 @@ const Auth = () => {
             });
           } else {
             history.push({
-              pathname: "/beranda",
+              pathname: "/course",
             });
           }
         })

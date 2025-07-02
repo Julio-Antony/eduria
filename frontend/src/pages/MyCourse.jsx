@@ -24,7 +24,7 @@ const MyCourse = () => {
 
       
       {courses.length === 0 ? (
-        <div className="alert alert-info">Kamu belum mengambil kursus apa pun.</div>
+        <div className="alert alert-info">Kamu belum memiliki kursus apa pun.</div>
       ) : (
         <div className="row">
           {courses.map((course) => (

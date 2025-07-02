@@ -18,6 +18,7 @@ import Course from "../pages/Course";
 import CourseDetail from "../pages/CourseDetail";
 import PaymentStatusPage from "../pages/PaymentStatusPage";
 import MyCourse from "../pages/MyCourse";
+import PaymentHistory from "../pages/PaymentHistory";
 
 const Routes = () => {
   return (
@@ -29,6 +30,7 @@ const Routes = () => {
       <Route path="/course" component={Course} />
       <Route path="/my_course" component={MyCourse} />
       <Route path="/course_detail/:id" component={CourseDetail} />
+      <Route path="/my_payments" component={PaymentHistory} />
       <Route path="/payment/status/:orderId" component={PaymentStatusPage} />
       <Route path="/kelas" component={Class} />
       <Route path="/detail_kelas/:id" component={ClassDetail} />
