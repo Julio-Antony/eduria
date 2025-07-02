@@ -46,7 +46,7 @@ const Dropdown = (props) => {
         removeUsername();
         removeUserImage();
         removeUserclass();
-        history.push("/");
+        history.push("/login");
       }
     });
   }

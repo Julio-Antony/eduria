@@ -2,14 +2,15 @@ import React, {useEffect} from 'react'
 
 import './layout.css'
 import Auth from '../../pages/Auth'
+import LandingPage from '../../pages/LandingPage';
 
 import Sidebar from '../sidebar/Sidebar'
 import TopNav from '../topnav/TopNav'
 import Routes from '../Routes'
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 
 import ThemeAction from '../../redux/actions/ThemeAction'
 
@@ -31,20 +32,21 @@ const Layout = () => {
 
     return (
         <BrowserRouter>
-        <Switch>
-        <Route path='/' exact component={Auth}/>
-            <Route render={(props) => (
-                <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
-                    <Sidebar {...props}/>
-                    <div className="layout__content">
-                        <TopNav/>
-                        <div className="layout__content-main">
-                            <Routes/>
+            <Switch>
+                <Route path='/' exact component={LandingPage}/>
+                <Route path="/login" component={Auth}/>
+                <Route render={(props) => (
+                    <div className={`layout ${themeReducer.mode} ${themeReducer.color}`}>
+                        <Sidebar {...props}/>
+                        <div className="layout__content">
+                            <TopNav/>
+                            <div className="layout__content-main">
+                                <Routes/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}/>
-        </Switch>
+                )}/>
+            </Switch>
         </BrowserRouter>
     )
 }

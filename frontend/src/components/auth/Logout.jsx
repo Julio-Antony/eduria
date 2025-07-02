@@ -15,7 +15,7 @@ export default function Logout() {
     if (willDelete) {
       removeUserSession();
       removeUserlevel();
-      history.push("/");
+      history.push("/login");
     }
   });
 }
